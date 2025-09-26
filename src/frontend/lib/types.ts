@@ -6,6 +6,16 @@ export interface Player {
   joinedAt: Date
 }
 
+export interface Bar {
+  id: string
+  name: string
+  code: string // QR code or manual entry code
+  teams: Team[]
+  completeQuizes: number
+  score: number
+  createdAt: Date
+}
+
 export interface Team {
   id: string
   name: string

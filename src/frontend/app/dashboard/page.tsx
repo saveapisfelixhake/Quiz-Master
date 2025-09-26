@@ -5,20 +5,20 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, Trophy, Play, User, LogOut } from "lucide-react"
+import { Users, Trophy, Play, User, LogOut, Beer } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 
 export default function DashboardPage() {
-  const { currentPlayer, currentTeam, currentQuiz, resetQuiz } = useQuizStore()
+  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz } = useQuizStore()
   const router = useRouter()
 
   useEffect(() => {
-    if (!currentPlayer || !currentTeam) {
+    if (!currentPlayer || !currentTeam || !currentBar) {
       router.push("/")
     }
-  }, [currentPlayer, currentTeam, router])
+  }, [currentPlayer, currentTeam, currentBar, router])
 
-  if (!currentPlayer || !currentTeam) {
+  if (!currentPlayer || !currentTeam || !currentBar) {
     return null
   }
 
@@ -43,29 +43,6 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Player Info */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5" />
-                Spieler-Info
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Name</p>
-                <p className="font-medium">{currentPlayer.name}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Team</p>
-                <p className="font-medium">{currentTeam.name}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Team-Code</p>
-                <Badge variant="secondary">{currentTeam.code}</Badge>
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Team Info */}
           <Card>
@@ -77,16 +54,52 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Team</p>
+                <p className="font-medium">{currentTeam.name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Team-Code</p>
+                <Badge variant="secondary">{currentTeam.code}</Badge>
+              </div>
+              <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Aktuelle Punkte</p>
                 <p className="text-2xl font-bold text-blue-600">{currentTeam.score}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Teammitglieder</p>
-                <p className="font-medium">{currentTeam.players.length} Spieler</p>
+                <p className="font-medium">{currentTeam.players.length === 1 ? "Spieler*in" : "Spieler*innen"}</p>
               </div>
               <Button variant="outline" onClick={() => router.push("/team")} className="w-full">
                 Team verwalten
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Bar Info */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Beer className="h-5 w-5" />
+                Bar-Info
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Name</p>
+                <p className="font-medium">{currentBar.name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Team</p>
+                <p className="font-medium">{currentBar.teams.length === 1 ? "Team" : "Teams"}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Quize abgeschlossen</p>
+                <p className="font-medium">{currentBar.completeQuizes}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Punkte</p>
+                <p className="font-medium">{currentBar.score}</p>
+              </div>
             </CardContent>
           </Card>
 

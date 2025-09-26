@@ -1,5 +1,61 @@
-import type { Team, Player, Question, Quiz, LeaderboardEntry } from "./types"
+import type { Team, Player, Question, Quiz, LeaderboardEntry, Bar } from "./types"
 
+export const mockBars: Bar[] = [
+  {
+    id: "1",
+    name: "Blaues Haus",
+    code: "BLAU",
+    teams: [],
+    completeQuizes: 2,
+    score: 1680,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "2",
+    name: "AIchhörnchen",
+    code: "BB2024",
+    teams: [],
+    completeQuizes: 0,
+    score: 720,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "3",
+    name: "Münster Easy",
+    code: "QW2024",
+    teams: [],
+    completeQuizes: 0,
+    score: 680,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "4",
+    name: "items",
+    code: "ITEMS123",
+    teams: [],
+    completeQuizes: 0,
+    score: 1535,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "5",
+    name: "viadee",
+    code: "VIADEE",
+    teams: [],
+    completeQuizes: 0,
+    score: 1000,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "6",
+    name: "LVM",
+    code: "LVM1896",
+    teams: [],
+    completeQuizes: 0,
+    score: 800,
+    createdAt: new Date("2024-01-15"),
+  },
+]
 export const mockTeams: Team[] = [
   {
     id: "1",

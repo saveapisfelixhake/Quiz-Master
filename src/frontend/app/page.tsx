@@ -170,7 +170,7 @@ function PlayerRegistrationForm() {
                 <Input
                   id="barCode"
                   type="text"
-                  placeholder="Beispielbar 1"
+                  placeholder="BLAU"
                   value={barCode}
                   onChange={(e) => setbarCode(e.target.value)}
                   disabled={isLoading}
