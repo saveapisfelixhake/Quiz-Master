@@ -5,9 +5,10 @@ using Backend.Domains.Common.Application.DI.Modules;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>((context, containerBuilder) =>
+    .ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
         {
-            containerBuilder.RegisterModule(new GraphQLModule(context.HostingEnvironment));
+            containerBuilder.RegisterModule<RestModule>();
+            containerBuilder.RegisterModule<SwaggerModule>();
         }
     );
 
@@ -15,8 +16,16 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseAuthorization();
 
-app.MapGraphQL();
+app.MapControllers();
 
-await app.RunWithGraphQLCommandsAsync(args).ConfigureAwait(false);
+await app.StartAsync().ConfigureAwait(false);
+await app.WaitForShutdownAsync().ConfigureAwait(false);
+
