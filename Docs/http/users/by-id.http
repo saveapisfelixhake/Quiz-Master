@@ -1,0 +1,4 @@
+< {%
+    client.global.set("user-id", "<your-user-id>")
+%}
+GET {{baseUrl}}/users?id={{user-id}}

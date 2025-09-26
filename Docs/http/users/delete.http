@@ -1,0 +1,4 @@
+< {%
+    client.global.set("user-id", "<your-user-id>")
+%}
+DELETE {{baseUrl}}/users/delete?id={{user-id}}

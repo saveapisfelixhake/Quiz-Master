@@ -1,0 +1,9 @@
+< {%
+    client.global.set("user-id", "<your-user-id>")
+%}
+PATCH {{baseUrl}}/users/update/password?id={{user-id}}
+Content-Type: application/json
+
+{
+  "password": "test2"
+}

@@ -1,0 +1,11 @@
+POST {{baseUrl}}/users/create
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "Test",
+  "email": "test@test.test",
+  "userName": "test",
+  "password": "test",
+  "isActive": true
+}
