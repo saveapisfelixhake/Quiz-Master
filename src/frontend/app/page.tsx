@@ -121,7 +121,7 @@ function PlayerRegistrationForm() {
       joinedAt: new Date(),
     }
 
-    const success = joinTeam(player, teamCode.toUpperCase())
+    const success = joinTeam(player, teamCode.toUpperCase(), barCode)
 
     if (success) {
       router.push("/dashboard")
@@ -179,7 +179,7 @@ function PlayerRegistrationForm() {
                 <Button
                   onClick={(e) => e.preventDefault()} variant="outline" size="icon" className="bg-primary">
                   <ScanQrCode
-                    style={{ width: "80%", height: "80%" }} className="text-secondary" />
+                    style={{ width: "80%", height: "80%" }} className="text-primary-foreground" />
                 </Button>
               </div>
             </div></div>
