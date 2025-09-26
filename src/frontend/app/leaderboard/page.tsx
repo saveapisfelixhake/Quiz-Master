@@ -11,7 +11,7 @@ import { Trophy, Medal, Award, Users, TrendingUp, ArrowLeft, Crown, Star } from 
 import { useQuizStore } from "@/lib/quiz-store"
 
 export default function LeaderboardPage() {
-  const { leaderboard, teams, players, currentTeam } = useQuizStore()
+  const { leaderboard, teams, bars, currentTeam } = useQuizStore()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("teams")
 
@@ -49,20 +49,17 @@ export default function LeaderboardPage() {
     }
   }
 
-  const topPlayers = players
-    .map((player) => {
-      const team = teams.find((t) => t.id === player.teamId)
+  const topBars = bars
+    .map((bar) => {
       return {
-        ...player,
-        teamName: team?.name || "Unbekanntes Team",
-        score: team?.score || 0,
+        ...bar,
       }
     })
     .sort((a, b) => b.score - a.score)
     .slice(0, 10)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-bg">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -71,7 +68,7 @@ export default function LeaderboardPage() {
           </Button>
           <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Bestenliste</h1>
-            <p className="text-gray-600 dark:text-gray-300">Aktuelle Rangliste aller Teams und Spieler</p>
+            <p className="text-gray-600 dark:text-gray-300">Aktuelle Rangliste aller Teams und Bars</p>
           </div>
         </div>
 
@@ -107,13 +104,13 @@ export default function LeaderboardPage() {
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2 mb-6">
-            <TabsTrigger value="teams" className="flex items-center gap-2">
+            <TabsTrigger value="teams" className="shadow-md flex items-center gap-2 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground">
               <Users className="h-4 w-4" />
               Teams
             </TabsTrigger>
-            <TabsTrigger value="players" className="flex items-center gap-2">
+            <TabsTrigger value="bars" className="shadow-md flex items-center gap-2 data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground">
               <TrendingUp className="h-4 w-4" />
-              Spieler
+              Bars
             </TabsTrigger>
           </TabsList>
 
@@ -128,7 +125,7 @@ export default function LeaderboardPage() {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
+                      <div className="pr-2">
                         <div
                           className={`w-12 h-12 rounded-full flex items-center justify-center ${getRankBadgeColor(
                             entry.rank,
@@ -136,23 +133,23 @@ export default function LeaderboardPage() {
                         >
                           {entry.rank <= 3 ? getRankIcon(entry.rank) : <span className="font-bold">#{entry.rank}</span>}
                         </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h3 className="text-xl font-semibold">{entry.teamName}</h3>
-                            {entry.rank === 1 && <Crown className="h-5 w-5 text-yellow-500" />}
-                            {entry.teamId === currentTeam?.id && (
-                              <Badge variant="secondary" className="text-xs">
-                                Ihr Team
-                              </Badge>
-                            )}
-                          </div>
-                          <p className="text-gray-600 dark:text-gray-400">
-                            {entry.players.length > 0 ? entry.players.join(", ") : "Keine aktiven Spieler"}
-                          </p>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-xl font-semibold">{entry.teamName}</h3>
+                          {entry.rank === 1 && <Crown className="h-5 w-5 text-secondary" />}
+                          {entry.teamId === currentTeam?.id && (
+                            <Badge variant="secondary" className="text-xs">
+                              Ihr Team
+                            </Badge>
+                          )}
                         </div>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          {entry.players.length > 0 ? entry.players.join(", ") : "Keine aktiven Spieler"}
+                        </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-3xl font-bold text-blue-600">{entry.score}</p>
+                        <p className="text-3xl font-bold text-primary">{entry.score}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400">Punkte</p>
                       </div>
                     </div>
@@ -162,11 +159,11 @@ export default function LeaderboardPage() {
             </div>
           </TabsContent>
 
-          {/* Players Leaderboard */}
-          <TabsContent value="players">
+          {/* Bars Leaderboard */}
+          <TabsContent value="bars">
             <div className="space-y-4">
-              {topPlayers.map((player, index) => (
-                <Card key={player.id} className="transition-all hover:shadow-md">
+              {topBars.map((bar, index) => (
+                <Card key={bar.id} className="transition-all hover:shadow-md" >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
@@ -179,16 +176,15 @@ export default function LeaderboardPage() {
                         </div>
                         <Avatar className="h-12 w-12">
                           <AvatarFallback className="bg-blue-600 text-white">
-                            {getPlayerInitials(player.name)}
+                            {getPlayerInitials(bar.name)}
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <h3 className="text-xl font-semibold">{player.name}</h3>
-                          <p className="text-gray-600 dark:text-gray-400">Team: {player.teamName}</p>
+                          <h3 className="text-xl font-semibold">{bar.name}</h3>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-3xl font-bold text-green-600">{player.score}</p>
+                        <p className="text-3xl font-bold text-primary">{bar.score}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400">Punkte</p>
                       </div>
                     </div>
@@ -229,7 +225,7 @@ export default function LeaderboardPage() {
               <CardTitle>Gesamtspieler</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-xl font-bold">{players.length}</p>
+              <p className="text-xl font-bold">{bars.length}</p>
               <p className="text-gray-600 dark:text-gray-400">Registrierte Spieler</p>
             </CardContent>
           </Card>
@@ -245,6 +241,6 @@ export default function LeaderboardPage() {
           </Button>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
