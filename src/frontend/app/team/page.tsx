@@ -11,6 +11,8 @@ import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Users, Crown, Copy, Check, ArrowLeft, UserPlus, QrCode } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
+import Image from "next/image";
+import qrCode from "../../assets/QRCodeTeamidMSHACK25.png";
 
 export default function TeamPage() {
   const { currentPlayer, currentTeam, teams } = useQuizStore()
@@ -237,6 +239,19 @@ function InviteDialog({ teamCode }: { teamCode: string }) {
 
   return (
     <div className="space-y-4">
+
+      <div className="space-y-2">
+        <p className="text-sm font-medium">So können andere beitreten:</p>
+        <ol className="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-decimal list-inside">
+          <li>Quiz Arena öffnen</li>
+          {/* <li>Auf "Jetzt anmelden" klicken</li> */}
+          <li>Namen eingeben</li>
+          <li>
+            QR Code scannen oder Team-Code eingeben: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{teamCode}</code>
+          </li>
+        </ol>
+      </div>
+
       <div>
         <Label>Team-Code</Label>
         <div className="flex items-center gap-2 mt-1">
@@ -247,22 +262,9 @@ function InviteDialog({ teamCode }: { teamCode: string }) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <p className="text-sm font-medium">So können andere beitreten:</p>
-        <ol className="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-decimal list-inside">
-          <li>Quiz Arena öffnen</li>
-          {/* <li>Auf "Jetzt anmelden" klicken</li> */}
-          <li>Namen eingeben</li>
-          <li>
-            Team-Code eingeben: <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{teamCode}</code>
-          </li>
-        </ol>
-      </div>
-
       <div className="pt-4 border-t">
-        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-          <QrCode className="h-4 w-4" />
-          <span>QR-Code Funktion kommt bald</span>
+        <div className="flex justify-center items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <span><Image src={qrCode} alt="QR Code" className="h-24 w-24" /></span>
         </div>
       </div>
     </div>
