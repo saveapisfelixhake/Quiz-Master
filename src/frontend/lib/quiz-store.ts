@@ -95,6 +95,18 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       answers: [],
     }),
 
-  removePlayerFromTeam: (currentPlayer, team) => {
+  removePlayerFromTeam: (currentPlayer: Player, currentTeam: Team) => {
+    const { teams } = get(); // aktuelles Array holen
+
+    const updatedTeams = teams.map(team =>
+      team.id === currentTeam.id
+        ? {
+          ...team,
+          players: team.players.filter(player => player.id !== currentPlayer.id),
+        }
+        : team
+    );
+
+    set({ teams: updatedTeams }); // State / Store aktualisieren
   }
 }))

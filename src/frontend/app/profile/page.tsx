@@ -14,7 +14,7 @@ import { ArrowLeft, User, Edit, Save, X, Trophy, Users, Calendar, Target } from 
 import { useQuizStore } from "@/lib/quiz-store"
 
 export default function ProfilePage() {
-  const { currentPlayer, currentTeam, leaderboard, resetQuiz } = useQuizStore()
+  const { currentPlayer, currentTeam, leaderboard, resetQuiz, removePlayerFromTeam } = useQuizStore()
   const router = useRouter()
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
@@ -59,6 +59,7 @@ export default function ProfilePage() {
   }
 
   const handleDeleteAccount = () => {
+    removePlayerFromTeam(currentPlayer, currentTeam)
     resetQuiz()
     router.push("/")
   }

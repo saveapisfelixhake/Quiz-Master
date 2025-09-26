@@ -9,7 +9,7 @@ import { Users, Trophy, Play, User, LogOut, Beer } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 
 export default function DashboardPage() {
-  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz } = useQuizStore()
+  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz, removePlayerFromTeam } = useQuizStore()
   const router = useRouter()
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function DashboardPage() {
   }
 
   const handleLogout = () => {
+    removePlayerFromTeam(currentPlayer, currentTeam)
     resetQuiz()
     router.push("/")
   }
