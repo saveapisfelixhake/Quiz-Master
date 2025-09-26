@@ -3,7 +3,9 @@ using Autofac.Extensions.DependencyInjection;
 using Backend.Domains.Bar.Application.DI.Modules;
 using Backend.Domains.Common.Application.DI.Modules;
 using Backend.Domains.Common.Domain.Options;
+using Backend.Domains.Common.Infrastructure.Persistence.Sql.Seeder;
 using Backend.Domains.Common.Persistence.Sql.Context;
+using Backend.Domains.User.Application.DI.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -18,13 +20,14 @@ if (EF.IsDesignTime)
 else
 {
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-        .ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
+        .ConfigureContainer<ContainerBuilder>((context, containerBuilder) =>
             {
                 containerBuilder.RegisterModule<CoreModule>();
 
                 containerBuilder.RegisterModule<RestModule>();
                 containerBuilder.RegisterModule<SwaggerModule>();
 
+                containerBuilder.RegisterModule(new UserModule(context.Configuration));
                 containerBuilder.RegisterModule<BarModule>();
             }
         );
@@ -49,6 +52,17 @@ await using (var scope = app.Services.CreateAsyncScope())
     await using var context = await factory.CreateDbContextAsync().ConfigureAwait(false);
 
     await context.Database.MigrateAsync().ConfigureAwait(false);
+
+    var seeders = scope.ServiceProvider.GetRequiredService<IEnumerable<ISeeder>>();
+    foreach (var seeder in seeders)
+    {
+        if (await seeder.CheckConditionAsync(context).ConfigureAwait(false))
+        {
+            await seeder.SeedAsync(context).ConfigureAwait(false);
+        }
+    }
+
+    await context.SaveChangesAsync().ConfigureAwait(false);
 }
 
 if (app.Environment.IsDevelopment())

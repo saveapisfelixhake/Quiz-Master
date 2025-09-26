@@ -1,0 +1,13 @@
+< {%
+    client.global.set("user-id", "<your-user-id>")
+%}
+PUT {{baseUrl}}/users/update?id={{user-id}}
+Content-Type: application/json
+
+{
+  "firstName": "Test 2",
+  "lastName": "Test 2",
+  "email": "test2@test2",
+  "userName": "test2",
+  "isActive": true
+}
