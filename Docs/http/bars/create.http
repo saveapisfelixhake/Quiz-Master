@@ -1,0 +1,11 @@
+POST {{baseUrl}}/bars/create
+Content-Type: application/json
+
+{
+  "Name": "Test",
+  "IsActive": true,
+  "Address": {
+    "Street": "Test Street",
+    "Number": "1a"
+  }
+}

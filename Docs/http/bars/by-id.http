@@ -1,0 +1,4 @@
+< {%
+    client.global.set("bar-id", "<your-bar-id>")
+%}
+GET {{baseUrl}}/bars?id={{bar-id}}
