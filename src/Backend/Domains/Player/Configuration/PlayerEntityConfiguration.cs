@@ -1,4 +1,4 @@
-using Backend.Domains.Player.Entites;
+using Backend.Domains.Player.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,6 +13,6 @@ public class PlayerEntityConfiguration :  IEntityTypeConfiguration<PlayerEntity>
         builder.HasKey(x => x.PlayerId);
         builder.Property(x => x.PlayerId).IsRequired();
         builder.Property(x => x.Name).IsRequired().HasMaxLength(20);
-        builder.Property(x => x.BarName).IsRequired(); ;
+        builder.Property(x => x.GroupName).IsRequired(); ;
     }
 }
