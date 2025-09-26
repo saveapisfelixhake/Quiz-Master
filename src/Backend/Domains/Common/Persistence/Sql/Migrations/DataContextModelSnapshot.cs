@@ -82,6 +82,26 @@ namespace Backend.Domains.Common.Persistence.Sql.Migrations
 
                     b.Navigation("Address");
                 });
+
+            modelBuilder.Entity("Backend.Domains.Player.Entites.PlayerEntity", b =>
+            {
+                b.Property<Guid>("PlayerId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("char(36)");
+
+                b.Property<string>("BarName")
+                    .IsRequired()
+                    .HasColumnType("longtext");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnType("varchar(20)");
+
+                b.HasKey("PlayerId");
+
+                b.ToTable("Player", (string)null);
+            });
 #pragma warning restore 612, 618
         }
     }
