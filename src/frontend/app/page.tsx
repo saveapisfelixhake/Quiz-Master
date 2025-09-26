@@ -21,7 +21,7 @@ export default function HomePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-blue-600 rounded-xl">
+            <div className="p-3 bg-primary rounded-xl">
               <Zap className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Rätselrausch</h1>
