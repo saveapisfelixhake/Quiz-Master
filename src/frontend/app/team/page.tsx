@@ -58,7 +58,7 @@ export default function TeamPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -80,7 +80,7 @@ export default function TeamPage() {
                   <Users className="h-5 w-5" />
                   Team-Übersicht
                 </CardTitle>
-                <Badge variant="secondary" className="text-lg px-3 py-1">
+                <Badge variant="secondary" className="bg-secondary text-secondary-foreground text-lg px-3 py-1">
                   {currentTeam.score} Punkte
                 </Badge>
               </div>
@@ -118,7 +118,7 @@ export default function TeamPage() {
                   <h3 className="text-lg font-semibold">Teammitglieder ({currentTeam.players.length})</h3>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" className="bg-primary text-primary-foreground" size="sm">
                         <UserPlus className="h-4 w-4 mr-2" />
                         Einladen
                       </Button>
@@ -158,7 +158,7 @@ export default function TeamPage() {
                           </p>
                         </div>
                         {player.id === currentTeam.players[0]?.id && (
-                          <Crown className="h-5 w-5 text-yellow-600" />
+                          <Crown className="h-5 w-5 text-secondary" />
                         )}
                       </div>
                     ))
@@ -182,15 +182,15 @@ export default function TeamPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-600">{currentTeam.score}</p>
+                  <p className="text-3xl font-bold text-primary">{currentTeam.score}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Gesamtpunkte</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-green-600">{currentTeam.players.length}</p>
+                  <p className="text-2xl font-bold text-primary">{currentTeam.players.length}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Aktive Spieler</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-purple-600">
+                  <p className="text-2xl font-bold text-primary">
                     {teams.findIndex((t) => t.id === currentTeam.id) + 1}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Aktuelle Position</p>
