@@ -22,6 +22,7 @@ interface QuizStore {
   submitAnswer: (answer: Omit<Answer, "id" | "submittedAt">) => void
   updateLeaderboard: () => void
   resetQuiz: () => void
+  removePlayerFromTeam: (currentPlayer: Player, currentTeam: Team) => void
 }
 
 export const useQuizStore = create<QuizStore>((set, get) => ({
@@ -93,4 +94,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentBar: null,
       answers: [],
     }),
+
+  removePlayerFromTeam: (currentPlayer, team) => {
+  }
 }))
