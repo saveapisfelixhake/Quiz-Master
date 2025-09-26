@@ -1,20 +1,20 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Backend.Domains.Common.Application.DI.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>((context, containerBuilder) =>
         {
-            //TODO: Implement required modules
+            containerBuilder.RegisterModule(new GraphQLModule(context.HostingEnvironment));
         }
     );
-builder.AddGraphQL()
-    .AddTypes();
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapGraphQL();
