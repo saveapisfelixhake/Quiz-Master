@@ -95,7 +95,7 @@ export default function HomePage() {
 
 function PlayerRegistrationForm() {
   const [playerName, setPlayerName] = useState("")
-  const [deskCode, setDeskCode] = useState("")
+  const [barCode, setbarCode] = useState("")
   const [teamCode, setTeamCode] = useState("")
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -165,14 +165,14 @@ function PlayerRegistrationForm() {
           </div>
 
             <div className="space-y-2">
-              <Label htmlFor="teamCode">Tisch-Code</Label>
+              <Label htmlFor="teamCode">Bar-Code</Label>
               <div className="flex items-center gap-2">
                 <Input
-                  id="deskCode"
+                  id="barCode"
                   type="text"
                   placeholder="Beispieltisch 1"
-                  value={deskCode}
-                  onChange={(e) => setDeskCode(e.target.value)}
+                  value={barCode}
+                  onChange={(e) => setbarCode(e.target.value)}
                   disabled={isLoading}
                   className="flex 1"
                 />
