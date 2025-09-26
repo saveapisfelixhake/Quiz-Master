@@ -4,7 +4,7 @@ using Backend.Domains.Bar.Application.DI.Modules;
 using Backend.Domains.Common.Application.DI.Modules;
 using Backend.Domains.Common.Domain.Options;
 using Backend.Domains.Common.Infrastructure.Persistence.Sql.Seeder;
-using Backend.Domains.Common.Persistence.Sql.Context;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Backend.Domains.User.Application.DI.Modules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

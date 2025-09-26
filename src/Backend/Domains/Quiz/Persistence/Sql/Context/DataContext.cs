@@ -1,18 +1,23 @@
 using Backend.Domains.Bar.Domain.Models.Entities;
 using Backend.Domains.Bar.Persistence.Sql.Configurations;
 using Backend.Domains.Player.Configuration;
+using Backend.Domains.Quiz.Entity;
+using Backend.Domains.Quiz.Persistence.Configuration;
 using Backend.Domains.Player.Entities;
 using Backend.Domains.User.Domain.Models.Entities;
 using Backend.Domains.User.Persistence.Sql.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Domains.Common.Persistence.Sql.Context;
+namespace Backend.Domains.Quiz.Persistence.Sql.Context;
 
 public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
     public DbSet<PlayerEntity> Players => Set<PlayerEntity>();
     public DbSet<BarEntity>  Bars => Set<BarEntity>();
     public DbSet<BarAddressEntity> BarAddresses => Set<BarAddressEntity>();
+    public DbSet<Entity.Quiz> Quizzes => Set<Entity.Quiz>();
+    public DbSet<Question> Questions => Set<Question>();
+    public DbSet<Answer> Answers => Set<Answer>();
     public DbSet<PlayerGroupEntity> PlayerGroups => Set<PlayerGroupEntity>();
     public DbSet<UserEntity> Users => Set<UserEntity>();
 
@@ -22,6 +27,9 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
         modelBuilder.ApplyConfiguration(new PlayerEntityConfiguration());
         modelBuilder.ApplyConfiguration(new BarEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new BarAddressEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new QuizConfiguration());
+        modelBuilder.ApplyConfiguration(new QuestionConfiguration());
+        modelBuilder.ApplyConfiguration(new AnswerConfiguration());
 
         modelBuilder.ApplyConfiguration(new PlayerEntityConfiguration());
 

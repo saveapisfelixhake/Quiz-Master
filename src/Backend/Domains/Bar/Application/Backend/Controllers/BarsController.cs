@@ -1,7 +1,7 @@
 using Backend.Domains.Bar.Application.Mapping;
 using Backend.Domains.Bar.Domain.Models.Dtos.Bar;
 using Backend.Domains.Bar.Domain.Models.Entities;
-using Backend.Domains.Common.Persistence.Sql.Context;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

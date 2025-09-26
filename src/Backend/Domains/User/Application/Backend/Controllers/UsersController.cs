@@ -1,5 +1,5 @@
 ﻿using Backend.Domains.Common.Infrastructure.Services;
-using Backend.Domains.Common.Persistence.Sql.Context;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Backend.Domains.User.Application.Mapping;
 using Backend.Domains.User.Domain.Models.Dto;
 using Backend.Domains.User.Domain.Models.Entities;

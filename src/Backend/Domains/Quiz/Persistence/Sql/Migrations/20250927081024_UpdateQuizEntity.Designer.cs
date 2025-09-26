@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Backend.Domains.User.Persistence.Sql.Migrations
+namespace Backend.Domains.Common.Persistence.Sql.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250926191915_AddIsInitialUserToUser")]
-    partial class AddIsInitialUserToUser
+    [Migration("20250927081024_UpdateQuizEntity")]
+    partial class UpdateQuizEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,88 @@ namespace Backend.Domains.User.Persistence.Sql.Migrations
                         .IsUnique();
 
                     b.ToTable("Bars", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Answer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answers", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("HasTextInput")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("MultipleAnswers")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("QuizId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Quiz", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quizzes", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domains.Player.Entites.PlayerEntity", b =>
@@ -143,6 +225,21 @@ namespace Backend.Domains.User.Persistence.Sql.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("BarEntityQuiz", b =>
+                {
+                    b.Property<Guid>("BarsId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("QuizzesId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("BarsId", "QuizzesId");
+
+                    b.HasIndex("QuizzesId");
+
+                    b.ToTable("BarEntityQuiz");
+                });
+
             modelBuilder.Entity("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", b =>
                 {
                     b.HasOne("Backend.Domains.Bar.Domain.Models.Entities.BarAddressEntity", "Address")
@@ -152,6 +249,49 @@ namespace Backend.Domains.User.Persistence.Sql.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Answer", b =>
+                {
+                    b.HasOne("Backend.Domains.Common.Persistence.Entity.Question", null)
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Question", b =>
+                {
+                    b.HasOne("Backend.Domains.Common.Persistence.Entity.Quiz", null)
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BarEntityQuiz", b =>
+                {
+                    b.HasOne("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", null)
+                        .WithMany()
+                        .HasForeignKey("BarsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Domains.Common.Persistence.Entity.Quiz", null)
+                        .WithMany()
+                        .HasForeignKey("QuizzesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Question", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("Backend.Domains.Common.Persistence.Entity.Quiz", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

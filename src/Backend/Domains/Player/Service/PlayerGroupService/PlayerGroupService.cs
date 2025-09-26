@@ -1,9 +1,7 @@
-using Backend.Domains.Common.Persistence.Sql.Context;
 using Backend.Domains.Player.Entities;
 using Backend.Domains.Player.Mapper.PlayerGroupMapper;
-using Backend.Domains.Player.Models;
 using Backend.Domains.Player.Models.PlayerGroup;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Domains.Player.Service.PlayerGroupService;

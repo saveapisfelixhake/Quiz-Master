@@ -21,6 +21,7 @@ public class BarEntity
 
     #endregion Entity
 
+    private readonly List<Quiz.Entity.Quiz> _quizzes = [];
     private readonly BarAddressEntity? _address = null;
 
     private BarEntity(Guid id, string name, bool isActive, Guid addressId)
@@ -37,6 +38,8 @@ public class BarEntity
 
     public Guid AddressId { get; }
     public BarAddressEntity Address => _address ?? throw new InvalidOperationException("Bar has no assigned address");
+    public IReadOnlyList<Quiz.Entity.Quiz> Quizzes => _quizzes.AsReadOnly();
+    
 
     public static BarEntity Create(string name, bool isActive, Guid addressId)
     {

@@ -20,5 +20,6 @@ public class BarEntityTypeConfiguration : IEntityTypeConfiguration<BarEntity>
         builder.HasIndex(x => x.AddressId).IsUnique();
 
         builder.HasOne(x => x.Address).WithOne().HasForeignKey<BarEntity>(x => x.AddressId);
+        builder.HasMany(x => x.Quizzes).WithMany(q => q.Bars);
     }
 }

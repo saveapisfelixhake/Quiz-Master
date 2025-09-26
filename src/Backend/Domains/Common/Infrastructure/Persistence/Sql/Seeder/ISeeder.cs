@@ -1,4 +1,4 @@
-﻿using Backend.Domains.Common.Persistence.Sql.Context;
+﻿using Backend.Domains.Quiz.Persistence.Sql.Context;
 
 namespace Backend.Domains.Common.Infrastructure.Persistence.Sql.Seeder;
 
