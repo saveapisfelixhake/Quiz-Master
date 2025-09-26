@@ -199,7 +199,7 @@ export default function LeaderboardPage() {
         <div className="mt-12 grid sm:grid-cols-3 gap-6">
           <Card>
             <CardHeader className="text-center">
-              <Trophy className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+              <Trophy className="h-8 w-8 text-secondary mx-auto mb-2" />
               <CardTitle>Führendes Team</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
@@ -210,7 +210,7 @@ export default function LeaderboardPage() {
 
           <Card>
             <CardHeader className="text-center">
-              <Users className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+              <Users className="h-8 w-8 text-secondary mx-auto mb-2" />
               <CardTitle>Aktive Teams</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
@@ -221,7 +221,7 @@ export default function LeaderboardPage() {
 
           <Card>
             <CardHeader className="text-center">
-              <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-2" />
+              <TrendingUp className="h-8 w-8 text-secondary mx-auto mb-2" />
               <CardTitle>Gesamtspieler</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
