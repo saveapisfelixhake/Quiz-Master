@@ -5,7 +5,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ImplicitUsings)' == 'enable'">
@@ -17,16 +16,11 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.10" />
     <PackageReference Include="HotChocolate.AspNetCore.CommandLine" Version="15.1.10" />
+    <PackageReference Include="HotChocolate.Data" Version="15.1.10" />
     <PackageReference Include="HotChocolate.Types.Analyzers" Version="15.1.10">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
   </ItemGroup>
 
 </Project>
