@@ -65,7 +65,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -167,15 +167,15 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-600">{currentTeam.score}</p>
+                  <p className="text-3xl font-bold text-primary">{currentTeam.score}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Team-Punkte</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-green-600">#{teamRank || "N/A"}</p>
+                  <p className="text-2xl font-bold text-primary">#{teamRank || "N/A"}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Team-Rang</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-purple-600">{currentTeam.players.length}</p>
+                  <p className="text-2xl font-bold text-primary">{currentTeam.players.length}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Teammitglieder</p>
                 </div>
               </CardContent>
@@ -239,7 +239,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Achievement Section */}
+        {/* Achievement Section
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -271,7 +271,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   )
