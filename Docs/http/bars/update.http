@@ -1,0 +1,14 @@
+< {%
+    client.global.set("bar-id", "<your-bar-id>")
+%}
+PUT {{baseUrl}}/bars/update?id={{bar-id}}
+Content-Type: application/json
+
+{
+  "name": "Test 2",
+  "IsActive": false,
+  "Address": {
+    "Street": "Test Street 2",
+    "Number": "2a"
+  }
+}
