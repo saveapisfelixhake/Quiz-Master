@@ -5,4 +5,34 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-   
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./src/Backend
+      dockerfile: Dockerfile
+    environment:
+      - MySql__Host=mysql
+      - MySql__Port=3306
+      - MySql__Database=quiz-master
+      - MySql__UserName=root
+      - MySql__Password=root
+    depends_on:
+      - mysql
+    ports:
+      - "5002:8080"
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: quiz-master
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
