@@ -1,0 +1,10 @@
+services:
+  backend:
+    hostname: backend
+    container_name: backend
+    build:
+      context: ..
+      dockerfile: src/Backend/Dockerfile
+    image: quiz-master-backend:dev
+    ports:
+      - "8080:8080"
