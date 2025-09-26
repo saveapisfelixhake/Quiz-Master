@@ -8,7 +8,7 @@ namespace Backend.Domains.Common.Application.Backend.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class PlayerController(IPlayerService playerService) : ControllerBase
-{
+{  
     private readonly IPlayerService _playerService =  playerService;
 
     [HttpGet("GetPlayer")]
@@ -24,7 +24,11 @@ public class PlayerController(IPlayerService playerService) : ControllerBase
         return Ok();
     }
 
-    [HttpPost("UpdatePlayer")]
-    public ActionResult UpdatePlayer(UpdatePlayerDto)
+    [HttpPatch("UpdatePlayer")]
+    public ActionResult UpdatePlayer(Guid Id,UpdatePlayerDto  playerDto)
+    {
+        _playerService.UpdatePlayer(Id ,playerDto);
+        return Ok();
+    }
     
 }

@@ -21,6 +21,15 @@ public class PlayerService(IDbContextFactory<DataContext> dataContext) : IPlayer
         var  player = playerContext.Players.Add(new PlayerEntity(playerDto.Name , playerDto.BarName  , Guid.NewGuid()));
         playerContext.SaveChanges();
     }
-    
-    
+
+    public void UpdatePlayer(Guid id, UpdatePlayerDto playerDto)
+    {
+        using var playerContext = dataContext.CreateDbContext();
+        var player = playerContext.Players.Find(id);
+        if (player == null)
+            return;
+        player.Name = playerDto.Name;
+        player.BarName = playerDto.BarName;
+        playerContext.SaveChanges();
+    }
 }

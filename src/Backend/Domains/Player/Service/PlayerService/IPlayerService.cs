@@ -7,4 +7,5 @@ public interface IPlayerService
 {
     public List<PlayerDto>  GetPlayer();
     void CreatePlayer(CreatePlayerDto playerDto);
+    void UpdatePlayer(Guid id, UpdatePlayerDto playerDto);
 }
