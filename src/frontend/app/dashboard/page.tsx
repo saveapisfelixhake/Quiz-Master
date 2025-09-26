@@ -67,7 +67,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Teammitglieder</p>
-                <p className="font-medium">{currentTeam.players.length === 1 ? "Spieler*in" : "Spieler*innen"}</p>
+                <p className="font-medium">{currentTeam.players.length} {currentTeam.players.length === 1 ? "Spieler*in" : "Spieler*innen"}</p>
               </div>
               <Button variant="outline" onClick={() => router.push("/team")} className="w-full">
                 Team verwalten
@@ -90,7 +90,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Team</p>
-                <p className="font-medium">{currentBar.teams.length === 1 ? "Team" : "Teams"}</p>
+                <p className="font-medium">{currentBar.teams.length} {currentBar.teams.length === 1 ? "Team" : "Teams"}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Quize abgeschlossen</p>
