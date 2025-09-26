@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { QrCode, Users, Trophy, Zap } from "lucide-react"
+import { QrCode, Users, Trophy, Zap, ScanQrCode } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 import { useRouter } from "next/navigation"
 
@@ -16,7 +16,8 @@ export default function HomePage() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-bg dark:from-gray-900 dark:to-gray-800">
+
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -31,41 +32,8 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <Card className="text-center">
-            <CardHeader>
-              <QrCode className="h-12 w-12 text-blue-600 mx-auto mb-2" />
-              <CardTitle>QR-Code Anmeldung</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>Scannen Sie den QR-Code oder geben Sie den Team-Code ein</CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center">
-            <CardHeader>
-              <Users className="h-12 w-12 text-green-600 mx-auto mb-2" />
-              <CardTitle>Team-Spiel</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>Arbeiten Sie mit Ihrem Team zusammen und sammeln Sie Punkte</CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center">
-            <CardHeader>
-              <Trophy className="h-12 w-12 text-yellow-600 mx-auto mb-2" />
-              <CardTitle>Bestenliste</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>Verfolgen Sie Ihre Position im Live-Ranking</CardDescription>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Registration Section */}
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto mb-12">
           {!showRegistration ? (
             <Card>
               <CardHeader className="text-center">
@@ -85,6 +53,41 @@ export default function HomePage() {
             <PlayerRegistrationForm />
           )}
         </div>
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card className="text-center">
+            <CardHeader>
+              <QrCode className="h-12 w-12 text-secondary mx-auto mb-2" />
+              <CardTitle>QR-Code Anmeldung</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>Scannen Sie den QR-Code oder geben Sie den Team-Code ein</CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center">
+            <CardHeader>
+              <Users className="h-12 w-12 text-secondary mx-auto mb-2" />
+              <CardTitle>Team-Spiel</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>Arbeiten Sie mit Ihrem Team zusammen und sammeln Sie Punkte</CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center">
+            <CardHeader>
+              <Trophy className="h-12 w-12 text-secondary mx-auto mb-2" />
+              <CardTitle>Bestenliste</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>Verfolgen Sie Ihre Position im Live-Ranking</CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+
+
       </div>
     </div>
   )
@@ -92,6 +95,7 @@ export default function HomePage() {
 
 function PlayerRegistrationForm() {
   const [playerName, setPlayerName] = useState("")
+  const [deskCode, setDeskCode] = useState("")
   const [teamCode, setTeamCode] = useState("")
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -132,7 +136,7 @@ function PlayerRegistrationForm() {
     <Card>
       <CardHeader className="text-center">
         <CardTitle>Team beitreten</CardTitle>
-        <CardDescription>Gib deinen Namen und euren Teamcode ein</CardDescription>
+        <CardDescription>Gib deinen Namen, euren Teamcode und euren Tischcode ein</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -148,7 +152,7 @@ function PlayerRegistrationForm() {
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="flex items-center gap-2"><div className="space-y-2">
             <Label htmlFor="teamCode">Team-Code</Label>
             <Input
               id="teamCode"
@@ -160,6 +164,28 @@ function PlayerRegistrationForm() {
             />
           </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="teamCode">Tisch-Code</Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  id="deskCode"
+                  type="text"
+                  placeholder="Beispieltisch 1"
+                  value={deskCode}
+                  onChange={(e) => setDeskCode(e.target.value)}
+                  disabled={isLoading}
+                  className="flex 1"
+                />
+                <Button
+                  onClick={(e) => e.preventDefault()} variant="outline" size="icon" className="bg-primary">
+                  <ScanQrCode
+                    style={{ width: "80%", height: "80%" }} className="text-secondary" />
+                </Button>
+              </div>
+            </div></div>
+
+
+
           {error && <div className="text-sm text-red-600 bg-red-50 dark:bg-red-900/20 p-3 rounded-md">{error}</div>}
 
           <Button type="submit" className="w-full" disabled={isLoading}>
@@ -167,6 +193,6 @@ function PlayerRegistrationForm() {
           </Button>
         </form>
       </CardContent>
-    </Card>
+    </Card >
   )
 }
