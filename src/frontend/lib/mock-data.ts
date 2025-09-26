@@ -3,15 +3,15 @@ import type { Team, Player, Question, Quiz, LeaderboardEntry } from "./types"
 export const mockTeams: Team[] = [
   {
     id: "1",
-    name: "Die Quizmaster",
-    code: "QM2024",
+    name: "Rätselrausch",
+    code: "MSHACK25",
     players: [],
-    score: 850,
+    score: 750,
     createdAt: new Date("2024-01-15"),
   },
   {
     id: "2",
-    name: "Brain Busters",
+    name: "AIchhörnchen",
     code: "BB2024",
     players: [],
     score: 720,
@@ -19,10 +19,34 @@ export const mockTeams: Team[] = [
   },
   {
     id: "3",
-    name: "Quiz Warriors",
+    name: "Münster Easy",
     code: "QW2024",
     players: [],
     score: 680,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "4",
+    name: "items",
+    code: "ITEMS123",
+    players: [],
+    score: 1535,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "5",
+    name: "viadee",
+    code: "VIADEE",
+    players: [],
+    score: 1000,
+    createdAt: new Date("2024-01-15"),
+  },
+  {
+    id: "6",
+    name: "LVM",
+    code: "LVM1896",
+    players: [],
+    score: 800,
     createdAt: new Date("2024-01-15"),
   },
 ]
@@ -30,20 +54,20 @@ export const mockTeams: Team[] = [
 export const mockPlayers: Player[] = [
   {
     id: "1",
-    name: "Max Mustermann",
-    teamId: "1",
+    name: "Stefanie Mollemeier",
+    teamId: "4",
     joinedAt: new Date("2024-01-15"),
   },
   {
     id: "2",
-    name: "Anna Schmidt",
-    teamId: "1",
+    name: "Rita Helter",
+    teamId: "5",
     joinedAt: new Date("2024-01-15"),
   },
   {
     id: "3",
-    name: "Tom Weber",
-    teamId: "2",
+    name: "Marcus Loskant",
+    teamId: "6",
     joinedAt: new Date("2024-01-15"),
   },
 ]
@@ -85,23 +109,23 @@ export const mockQuiz: Quiz = {
 export const mockLeaderboard: LeaderboardEntry[] = [
   {
     teamId: "1",
-    teamName: "Die Quizmaster",
-    score: 850,
+    teamName: "Rätselrausch",
+    score: 750,
     rank: 1,
-    players: ["Max Mustermann", "Anna Schmidt"],
+    players: ["Christian", "Felix", "Florian", "Jens", "Jule", "Lara", "Leon", "Roman", "Selina"],
   },
   {
     teamId: "2",
-    teamName: "Brain Busters",
+    teamName: "AIchhörnchen",
     score: 720,
     rank: 2,
-    players: ["Tom Weber"],
+    players: ["Felix", "Felix", "Friedjof", "Julia", "Moritz", "Paul", "Sophia"],
   },
   {
     teamId: "3",
-    teamName: "Quiz Warriors",
+    teamName: "Münster Easy",
     score: 680,
     rank: 3,
-    players: [],
+    players: ["Alicia Kristina", "Bandik", "Franziska", "Frederik", "Jana", "Johannes", "Joscha", "Lisa", "Renja", "Robert", "Sarah", "Tim"],
   },
 ]

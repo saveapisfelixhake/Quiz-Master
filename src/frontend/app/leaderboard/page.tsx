@@ -123,9 +123,8 @@ export default function LeaderboardPage() {
               {leaderboard.map((entry, index) => (
                 <Card
                   key={entry.teamId}
-                  className={`transition-all hover:shadow-md ${
-                    entry.teamId === currentTeam?.id ? "ring-2 ring-blue-500" : ""
-                  }`}
+                  className={`transition-all hover:shadow-md ${entry.teamId === currentTeam?.id ? "ring-2 ring-blue-500" : ""
+                    }`}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
@@ -190,7 +189,7 @@ export default function LeaderboardPage() {
                       </div>
                       <div className="text-right">
                         <p className="text-3xl font-bold text-green-600">{player.score}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Team-Punkte</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Punkte</p>
                       </div>
                     </div>
                   </CardContent>

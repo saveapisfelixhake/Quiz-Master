@@ -56,3 +56,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Highscore Liste
 ## Nächste Frage veröffentlichen
 ## Antworten einsehen
+
+
+# Design
+
+## Hintergrund Grau
+## Icons gleiche Farbe
+## Weniger Farben
+## Startscreen 2 nebeneinander
