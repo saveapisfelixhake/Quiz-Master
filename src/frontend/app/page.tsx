@@ -24,7 +24,7 @@ export default function HomePage() {
             <div className="p-3 bg-blue-600 rounded-xl">
               <Zap className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Quiz Arena</h1>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Rätselrausch</h1>
           </div>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-balance">
             Treten Sie Ihrem Team bei und zeigen Sie Ihr Wissen in spannenden Quiz-Duellen
@@ -132,7 +132,7 @@ function PlayerRegistrationForm() {
     <Card>
       <CardHeader className="text-center">
         <CardTitle>Team beitreten</CardTitle>
-        <CardDescription>Geben Sie Ihren Namen und den Team-Code ein</CardDescription>
+        <CardDescription>Gib deinen Namen und euren Teamcode ein</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -153,7 +153,7 @@ function PlayerRegistrationForm() {
             <Input
               id="teamCode"
               type="text"
-              placeholder="QM2024"
+              placeholder="MSHACK25"
               value={teamCode}
               onChange={(e) => setTeamCode(e.target.value.toUpperCase())}
               disabled={isLoading}
