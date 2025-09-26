@@ -1,0 +1,4 @@
+< {%
+    client.global.set("bar-id", "<your-bar-id>")
+%}
+DELETE {{baseUrl}}/bars/delete?id={{bar-id}}

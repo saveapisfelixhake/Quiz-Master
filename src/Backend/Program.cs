@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Backend.Domains.Bar.Application.DI.Modules;
 using Backend.Domains.Common.Application.DI.Modules;
 using Backend.Domains.Common.Domain.Options;
 using Backend.Domains.Common.Persistence.Sql.Context;
@@ -23,6 +24,8 @@ else
 
                 containerBuilder.RegisterModule<RestModule>();
                 containerBuilder.RegisterModule<SwaggerModule>();
+
+                containerBuilder.RegisterModule<BarModule>();
             }
         );
 
@@ -54,6 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
