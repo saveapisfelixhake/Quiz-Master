@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using Backend.Domains.Bar.Domain.Options.Authentication;
 using Backend.Domains.Common.Infrastructure.Constants;
-using Backend.Domains.Common.Persistence.Sql.Context;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

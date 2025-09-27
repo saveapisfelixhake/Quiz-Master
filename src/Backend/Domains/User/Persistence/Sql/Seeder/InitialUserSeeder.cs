@@ -1,6 +1,6 @@
 ﻿using Backend.Domains.Common.Infrastructure.Persistence.Sql.Seeder;
 using Backend.Domains.Common.Infrastructure.Services;
-using Backend.Domains.Common.Persistence.Sql.Context;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Backend.Domains.User.Domain.Models.Entities;
 using Backend.Domains.User.Domain.Options;
 using Microsoft.EntityFrameworkCore;

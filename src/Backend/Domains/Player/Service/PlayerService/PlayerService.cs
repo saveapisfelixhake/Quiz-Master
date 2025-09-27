@@ -1,8 +1,6 @@
-using Backend.Domains.Common.Persistence.Sql.Context;
 using Backend.Domains.Player.Entities;
-using Backend.Domains.Player.Mapper;
 using Backend.Domains.Player.Mapper.PlayerMapper;
-using Backend.Domains.Player.Models;
+using Backend.Domains.Quiz.Persistence.Sql.Context;
 using Backend.Domains.Player.Models.Player;
 using Microsoft.EntityFrameworkCore;
 
