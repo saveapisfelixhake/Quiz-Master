@@ -7,43 +7,43 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Users, Trophy, Play, User, LogOut, Beer } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
-import {getPlayerFromCookie, getTeamFromCookie} from "@/lib/cookie-utils";
-import {Team} from "@/lib/types";
+import { getPlayerFromCookie, getTeamFromCookie } from "@/lib/cookie-utils";
+import { Team } from "@/lib/types";
 
 export default function DashboardPage() {
   const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz, removePlayerFromTeam, setCurrentTeam, setCurrentPlayer, setCurrentBar, logout } = useQuizStore()
   const router = useRouter()
 
   useEffect(() => {
-    if (!currentTeam){
+    if (!currentTeam) {
       const teamFromCookie = getTeamFromCookie()
-      if (teamFromCookie){
+      if (teamFromCookie) {
         setCurrentTeam({
           ...teamFromCookie,
-          players:[],
+          players: [],
           createdAt: new Date(),
         });
       }
     }
-    if (!currentPlayer){
+    if (!currentPlayer) {
       const playerFromCookie = getPlayerFromCookie()
-      if (playerFromCookie){
+      if (playerFromCookie) {
         setCurrentPlayer({
           ...playerFromCookie,
           joinedAt: new Date(),
         })
       }
     }
-    if (!currentBar){
-    setCurrentBar({
-      name: "",
-      id: "",
-      code: "",
-      teams:[],
-      completeQuizes: 0,
-      score:0,
-      createdAt: new Date(),
-    });
+    if (!currentBar) {
+      setCurrentBar({
+        name: "",
+        id: "",
+        code: "",
+        teams: [],
+        completeQuizes: 0,
+        score: 0,
+        createdAt: new Date(),
+      });
     }
 
     if (!currentPlayer || !currentTeam || !currentBar) {
@@ -105,7 +105,7 @@ export default function DashboardPage() {
                 <p className="text-sm text-gray-600 dark:text-gray-400">Teammitglieder</p>
                 <p className="font-medium">{currentTeam.players.length} {currentTeam.players.length === 1 ? "Spieler*in" : "Spieler*innen"}</p>
               </div>
-              <Button variant="outline" onClick={() => router.push("/team")} className="w-full bg-primary text-primary-foreground">
+              <Button onClick={() => router.push("/team")}>
                 Team verwalten
               </Button>
             </CardContent>
