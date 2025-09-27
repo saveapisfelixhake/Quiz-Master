@@ -122,7 +122,7 @@ function PlayerRegistrationForm() {
 
   function fillForm() {
     setPlayerName("Lara Hildebrandt")
-    setbarCode("HUB")
+    setbarCode("STWMS")
     setTeamCode("MSHACK25")
     return
   }

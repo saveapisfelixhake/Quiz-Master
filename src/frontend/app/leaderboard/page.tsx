@@ -169,7 +169,7 @@ export default function LeaderboardPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div
-                          className={`w-12 h-12 rounded-full flex items-center justify-center ${getRankBadgeColor(
+                          className={`w-12 h-12 rounded-full flex flex-shrink-0 items-center justify-center ${getRankBadgeColor(
                             index + 1,
                           )}`}
                         >
