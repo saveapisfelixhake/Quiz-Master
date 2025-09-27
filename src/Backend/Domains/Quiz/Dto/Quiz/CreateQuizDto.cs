@@ -1,4 +1,6 @@
-﻿namespace Backend.Domains.Quiz.Dto.Quiz;
+﻿using Backend.Domains.Quiz.Entity.Enum;
+
+namespace Backend.Domains.Quiz.Dto.Quiz;
 
 public class CreateQuizDto
 {
@@ -11,4 +13,7 @@ public class CreateQuizDto
     public DateTime EndDate { get; set; }
     
     public bool IsActive { get; set; }
+    
+    public QuizStateEnum QuizState { get; set; }
+
 }

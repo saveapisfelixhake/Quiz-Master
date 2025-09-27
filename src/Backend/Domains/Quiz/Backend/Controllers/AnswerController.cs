@@ -36,7 +36,7 @@ public class AnswerController(IDbContextFactory<DataContext> factory, IAnswerMap
         return Ok($"Updated answer with id {answerId}.");
     }
     
-    [HttpDelete("get")]
+    [HttpGet("get")]
     public IActionResult GetAnswers(Guid answerId)
     {
         using var context = factory.CreateDbContext();
@@ -48,7 +48,7 @@ public class AnswerController(IDbContextFactory<DataContext> factory, IAnswerMap
         return Ok(dto);
     }
     
-    [HttpDelete("all")]
+    [HttpGet("all")]
     public IActionResult GetAllAnswers()
     {
         using var context = factory.CreateDbContext();

@@ -1,66 +1,55 @@
-﻿using Backend.Domains.Quiz.Dto.Quiz;
-using Backend.Domains.Quiz.Mapping.Quiz;
-using Backend.Domains.Quiz.Persistence.Sql.Context;
+﻿using Backend.Domains.Quiz.Backend.Services;
+using Backend.Domains.Quiz.Dto.Quiz;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Domains.Quiz.Backend.Controllers;
 
 [ApiController]
 [Route("quiz")]
-public class QuizController(IDbContextFactory<DataContext> factory, IQuizMapper mapper) : ControllerBase
+public class QuizController(IQuizService service) : ControllerBase
 {
     [HttpPost("create")]
     public IActionResult CreateQuiz(CreateQuizDto dto)
     {
-        using var context = factory.CreateDbContext();
+        var quizId = service.Create(dto);
         
-        var quiz = mapper.MapCreateQuizDtoToQuiz(dto);
-        context.Add(quiz);
-        
-        return Ok($"Created quiz with id {quiz.Id}.");
+        return Ok(quizId);
     }
 
     [HttpPut("update")]
     public IActionResult UpdateQuiz(Guid quizId, UpdateQuizDto dto)
     {
-        using var context = factory.CreateDbContext();
-        
-        var quiz = context.Quizzes.FirstOrDefault(x => x.Id == quizId);
-        
-        if (quiz == null)
+        var guid = service.Update(quizId, dto);
+        if (guid == null)
         {
             return NotFound();
         }
         
-        mapper.MapUpdateQuizDtoToQuiz(dto, quiz);
-        
-        context.SaveChanges();
-        
-        return Ok($"Updated quiz with id {quiz.Id}.");
+        return Ok(guid);
     }
     
-    [HttpDelete("´get")]
+    [HttpGet("´get")]
     public IActionResult GetQuiz(Guid quizId)
     {
-        using var context = factory.CreateDbContext();
-
-        var quiz = context.Quizzes.Include(quiz => quiz.Questions).FirstOrDefault(x => x.Id == quizId);
-        if (quiz == null)
+        var dto = service.Get(quizId);
+        if (dto == null)
         {
             return NotFound();
         }
-
-        var dto = mapper.MapQuizToGetQuizDto(quiz);
+        
         return Ok(dto);
     }
     
-    [HttpDelete("all")]
+    
+    
+    [HttpGet("all")]
     public IActionResult GetAllQuizzes()
     {
-        using var context = factory.CreateDbContext();
-        
-        var dtoList = context.Quizzes.Select(quiz => mapper.MapQuizToGetQuizDto(quiz)).ToList();
+        var dtoList = service.All();
+        if (dtoList == null)
+        {
+            return NotFound();
+        }
 
         return Ok(dtoList);
     }
@@ -68,17 +57,12 @@ public class QuizController(IDbContextFactory<DataContext> factory, IQuizMapper 
     [HttpDelete("delete")]
     public IActionResult DeleteQuiz(Guid quizId)
     {
-        using var context = factory.CreateDbContext();
-
-        var quiz = context.Quizzes.FirstOrDefault(x => x.Id == quizId);
-        
-        if (quiz == null)
+        var request = service.Delete(quizId);
+        if (!request)
         {
             return NotFound();
         }
         
-        context.Quizzes.Remove(quiz);
-        
-        return Ok($"Deleted quiz with id {quizId}.");
+        return Ok(request);
     }
 }

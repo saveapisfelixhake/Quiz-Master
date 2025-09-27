@@ -1,4 +1,5 @@
 ﻿using Backend.Domains.Bar.Domain.Models.Entities;
+using Backend.Domains.Quiz.Entity.Enum;
 
 namespace Backend.Domains.Quiz.Dto.Quiz;
 
@@ -15,6 +16,8 @@ public class GetQuizDto
     public DateTime EndDate { get; set; }
     
     public bool IsActive { get; set; }
+    
+    public QuizStateEnum QuizState { get; set; }
     
     public List<Entity.Question> Questions { get; set; }
     

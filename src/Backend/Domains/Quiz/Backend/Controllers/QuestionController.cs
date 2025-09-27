@@ -45,7 +45,7 @@ public class QuestionController(IDbContextFactory<DataContext> factory, IQuestio
         return Ok($"Updated question with id {question.Id}.");
     }
     
-    [HttpPut("get")]
+    [HttpGet("get")]
     public IActionResult GetQuestion(Guid questionId)
     {
         using var context = factory.CreateDbContext();
@@ -61,7 +61,7 @@ public class QuestionController(IDbContextFactory<DataContext> factory, IQuestio
         return Ok(dto);
     }
     
-    [HttpPut("all")]
+    [HttpGet("all")]
     public IActionResult GetAllQuestion()
     {
         using var context = factory.CreateDbContext();

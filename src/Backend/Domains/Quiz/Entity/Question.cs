@@ -13,5 +13,7 @@ public class Question
     
     public bool HasTextInput { get; set; }
     
+    public bool IsAnswered { get; set; }
+    
     public List<Answer> Answers { get; set; }
 }
