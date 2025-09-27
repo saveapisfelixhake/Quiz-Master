@@ -99,7 +99,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Aktuelle Punkte</p>
-                <p className="text-2xl font-bold text-blue-600">{currentTeam.score}</p>
+                <p className="text-2xl font-bold text-primary">{currentTeam.score}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Teammitglieder</p>
