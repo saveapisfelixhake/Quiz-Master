@@ -4,16 +4,19 @@ using Backend.Domains.Common.Persistence.Sql.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Backend.Domains.Common.Persistence.Sql.Migrations
+namespace Backend.Domains.Player.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250926201326_Changed Player Entity and added PlayerGroupEntity")]
+    partial class ChangedPlayerEntityandaddedPlayerGroupEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,11 +80,6 @@ namespace Backend.Domains.Common.Persistence.Sql.Migrations
                     b.Property<Guid>("PlayerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
-            modelBuilder.Entity("Backend.Domains.Player.Entites.PlayerEntity", b =>
-                {
-                    b.Property<Guid>("PlayerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
 
                     b.Property<string>("GroupName")
                         .IsRequired()
@@ -115,67 +113,6 @@ namespace Backend.Domains.Common.Persistence.Sql.Migrations
                     b.HasKey("GroupId");
 
                     b.ToTable("PlayerGroup", (string)null);
-                });
-
-            modelBuilder.Entity("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", b =>
-                {
-                    b.HasOne("Backend.Domains.Bar.Domain.Models.Entities.BarAddressEntity", "Address")
-                        .WithOne()
-                        .HasForeignKey("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-                    b.ToTable("Player", (string)null);
-                });
-
-            modelBuilder.Entity("Backend.Domains.User.Domain.Models.Entities.UserEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("IsInitialUser")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsActive");
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
-
-                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", b =>
