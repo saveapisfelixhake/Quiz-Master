@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,10 +10,31 @@ import { Label } from "@/components/ui/label"
 import { QrCode, Users, Trophy, Zap, ScanQrCode } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 import { useRouter } from "next/navigation"
+import { savePlayerToCookie, saveTeamToCookie } from "@/lib/cookie-utils"
+
 
 export default function HomePage() {
   const [showRegistration, setShowRegistration] = useState(false)
   const router = useRouter()
+  const { currentPlayer, currentTeam, isInitialized } = useQuizStore()
+
+  useEffect(() => {
+    alert(currentPlayer);
+    if (isInitialized && currentPlayer && currentTeam) {
+      router.push("/dashboard")
+    }
+  }, [isInitialized, currentPlayer, currentTeam, router])
+
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Lade Quiz Arena...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-bg dark:from-gray-900 dark:to-gray-800">
@@ -121,9 +142,27 @@ function PlayerRegistrationForm() {
       joinedAt: new Date(),
     }
 
+    savePlayerToCookie({
+      id: player.id,
+      name: player.name,
+      teamId: "",
+      joinedAt:""
+    })
+
+
+
+    
+
     const success = joinTeam(player, teamCode.toUpperCase(), barCode)
 
     if (success) {
+      saveTeamToCookie({
+        id: "",
+        name:"",
+        code: teamCode,
+        score: 0,
+        createdAt:""
+      })
       router.push("/dashboard")
     } else {
       setError("Team-Code nicht gefunden. Bitte überprüfen Sie den Code.")

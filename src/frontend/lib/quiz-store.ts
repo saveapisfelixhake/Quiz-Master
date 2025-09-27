@@ -1,6 +1,15 @@
 import { create } from "zustand"
 import type { Player, Team, Quiz, Bar, Answer, LeaderboardEntry } from "./types"
 import { mockTeams, mockPlayers, mockQuiz, mockLeaderboard, mockBars } from "./mock-data"
+import {
+  savePlayerToCookie,
+  getPlayerFromCookie,
+  saveTeamToCookie,
+  getTeamFromCookie,
+  clearPlayerCookies,
+  type CookiePlayer,
+  type CookieTeam,
+} from "./cookie-utils"
 
 interface QuizStore {
   // State
@@ -13,8 +22,12 @@ interface QuizStore {
   currentQuiz: Quiz | null
   answers: Answer[]
   leaderboard: LeaderboardEntry[]
+  isInitialized: boolean
+
 
   // Actions
+  updatePlayerProfile: (updates: Partial<Player>) => void
+  initializeFromCookies: () => void
   setCurrentPlayer: (player: Player) => void
   setCurrentTeam: (team: Team) => void
   setCurrentBar: (bar: Bar) => void
@@ -22,6 +35,42 @@ interface QuizStore {
   submitAnswer: (answer: Omit<Answer, "id" | "submittedAt">) => void
   updateLeaderboard: () => void
   resetQuiz: () => void
+  logout: () => void
+}
+
+function playerToCookie(player: Player): CookiePlayer {
+  return {
+    ...player,
+    joinedAt: player.joinedAt.toISOString(),
+  }
+}
+
+function cookieToPlayer(cookiePlayer: CookiePlayer): Player {
+  return {
+    ...cookiePlayer,
+    joinedAt: new Date(cookiePlayer.joinedAt),
+  }
+}
+
+function teamToCookie(team: Team): CookieTeam {
+  return {
+    id: team.id,
+    name: team.name,
+    code: team.code,
+    score: team.score,
+    createdAt: team.createdAt.toISOString(),
+  }
+}
+
+function cookieToTeam(cookieTeam: CookieTeam, players: Player[] = []): Team {
+  return {
+    id: cookieTeam.id,
+    name: cookieTeam.name,
+    code: cookieTeam.code,
+    score: cookieTeam.score,
+    players: players,
+    createdAt: new Date(cookieTeam.createdAt),
+  }
 }
 
 export const useQuizStore = create<QuizStore>((set, get) => ({
@@ -35,11 +84,79 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
   currentQuiz: mockQuiz,
   answers: [],
   leaderboard: mockLeaderboard,
+  isInitialized: false,
+
+  updatePlayerProfile: (updates) => {
+  set((state) => {
+    if (!state.currentPlayer) return {}
+
+    const updatedPlayer: Player = { ...state.currentPlayer, ...updates }
+
+    // players-Liste aktualisieren
+    const players = state.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p)
+
+    // currentTeam.players aktualisieren (falls im Team)
+    const currentTeam = state.currentTeam
+      ? { 
+          ...state.currentTeam, 
+          players: state.currentTeam.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p) 
+        }
+      : null
+
+    // teams[] aktualisieren, damit der Player auch dort konsistent ist
+    const teams = state.teams.map(t => 
+      t.id === currentTeam?.id
+        ? { ...t, players: t.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p) }
+        : t
+    )
+
+    if (typeof window !== "undefined") {
+      savePlayerToCookie(playerToCookie(updatedPlayer))
+    }
+
+    return {
+      currentPlayer: updatedPlayer,
+      players,
+      currentTeam,
+      teams,
+    }
+  })
+},
 
   // Actions
-  setCurrentPlayer: (player) => set({ currentPlayer: player }),
+  initializeFromCookies: () => {
+    if (typeof window === "undefined") return
 
-  setCurrentTeam: (team) => set({ currentTeam: team }),
+    const cookiePlayer = getPlayerFromCookie()
+    const cookieTeam = getTeamFromCookie()
+
+    if (cookiePlayer && cookieTeam) {
+      const player = cookieToPlayer(cookiePlayer)
+      const team = cookieToTeam(cookieTeam, [player])
+
+      set({
+        currentPlayer: player,
+        currentTeam: team,
+        isInitialized: true,
+      })
+    } else {
+      set({ isInitialized: true })
+    }
+  },
+  
+  setCurrentPlayer: (player) => {
+    set({ currentPlayer: player })
+    if (typeof window !== "undefined") {
+      savePlayerToCookie(playerToCookie(player))
+    }
+  },
+
+ setCurrentTeam: (team) => {
+    set({ currentTeam: team })
+    if (typeof window !== "undefined") {
+      saveTeamToCookie(teamToCookie(team))
+    }
+  },
 
   setCurrentBar: (bar) => set({ currentBar: bar }),
 
@@ -93,4 +210,14 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentBar: null,
       answers: [],
     }),
+  logout: () => {
+    if (typeof window !== "undefined") {
+      clearPlayerCookies()
+    }
+    set({
+      currentPlayer: null,
+      currentTeam: null,
+      answers: [],
+    })
+  },
 }))

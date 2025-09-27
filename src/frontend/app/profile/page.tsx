@@ -14,7 +14,7 @@ import { ArrowLeft, User, Edit, Save, X, Trophy, Users, Calendar, Target } from 
 import { useQuizStore } from "@/lib/quiz-store"
 
 export default function ProfilePage() {
-  const { currentPlayer, currentTeam, leaderboard, resetQuiz } = useQuizStore()
+  const { currentPlayer, currentTeam, leaderboard, updatePlayerProfile, logout } = useQuizStore()
   const router = useRouter()
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
@@ -54,12 +54,15 @@ export default function ProfilePage() {
 
   const handleSaveProfile = () => {
     // In a real app, this would update the player in the store/database
-    console.log("Saving profile:", editedName)
+    if (editedName.trim() && editedName.trim() !== currentPlayer.name) {
+      updatePlayerProfile({ name: editedName.trim() })
+    }
     setIsEditing(false)
   }
 
   const handleDeleteAccount = () => {
     resetQuiz()
+    logout();
     router.push("/")
   }
 
