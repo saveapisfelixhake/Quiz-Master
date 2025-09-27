@@ -226,7 +226,7 @@ function InviteDialog({ teamCode }: { teamCode: string }) {
   const [copied, setCopied] = useState(false)
 
   const copyInviteText = async () => {
-    const inviteText = `Tritt meinem Quiz-Team bei! 🎯\n\nTeam-Code: ${teamCode}\n\nGehe zu Quiz Arena und gib den Code ein, um beizutreten!`
+    const inviteText = `Tritt meinem Quiz-Team bei! 🎯\n\nTeam-Code: ${teamCode}\n\nGehe zu Rätselrausch und gib den Code ein, um beizutreten!`
 
     try {
       await navigator.clipboard.writeText(inviteText)
@@ -243,7 +243,7 @@ function InviteDialog({ teamCode }: { teamCode: string }) {
       <div className="space-y-2">
         <p className="text-sm font-medium">So können andere beitreten:</p>
         <ol className="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-decimal list-inside">
-          <li>Quiz Arena öffnen</li>
+          <li>Rätselrausch öffnen</li>
           {/* <li>Auf "Jetzt anmelden" klicken</li> */}
           <li>Namen eingeben</li>
           <li>

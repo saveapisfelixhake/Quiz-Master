@@ -30,7 +30,7 @@ export default function HomePage() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Lade Quiz Arena...</p>
+          <p className="text-gray-600 dark:text-gray-300">Lade Rätselrausch...</p>
         </div>
       </div>
     )
@@ -146,7 +146,7 @@ function PlayerRegistrationForm() {
       id: player.id,
       name: player.name,
       teamId: "",
-      joinedAt:""
+      joinedAt: ""
     })
 
     const success = joinTeam(player, teamCode.toUpperCase(), barCode)
@@ -154,10 +154,10 @@ function PlayerRegistrationForm() {
     if (success) {
       saveTeamToCookie({
         id: "",
-        name:"",
+        name: "",
         code: teamCode,
         score: 0,
-        createdAt:""
+        createdAt: ""
       })
       router.push("/dashboard")
     } else {
