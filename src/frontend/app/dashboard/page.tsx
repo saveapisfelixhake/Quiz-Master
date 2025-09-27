@@ -72,7 +72,7 @@ export default function DashboardPage() {
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Quiz Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-300">Willkommen zurück, {currentPlayer.name}!</p>
           </div>
-          <Button variant="outline" className="bg-primary text-primary-foreground" onClick={handleLogout}>
+          <Button onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
             Abmelden
           </Button>
