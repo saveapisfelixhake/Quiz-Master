@@ -112,12 +112,20 @@ export default function HomePage() {
   )
 }
 
+
 function PlayerRegistrationForm() {
   const [playerName, setPlayerName] = useState("")
   const [barCode, setbarCode] = useState("")
   const [teamCode, setTeamCode] = useState("")
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
+  function fillForm() {
+    setPlayerName("Lara Hildebrandt")
+    setbarCode("HUB")
+    setTeamCode("MSHACK25")
+    return
+  }
 
   const { joinTeam } = useQuizStore()
   const router = useRouter()
@@ -209,8 +217,8 @@ function PlayerRegistrationForm() {
                   disabled={isLoading}
                   className="flex 1"
                 />
-                <Button
-                  onClick={(e) => e.preventDefault()} variant="outline" size="icon" className="bg-primary">
+                <Button type="button"
+                  onClick={() => fillForm()} variant="outline" size="icon" className="bg-primary">
                   <ScanQrCode
                     style={{ width: "80%", height: "80%" }} className="text-primary-foreground" />
                 </Button>
