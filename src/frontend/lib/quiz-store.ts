@@ -199,7 +199,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     }))
   },
   logout: () => {
-
+    clearPlayerCookies();
   },
 
   updateLeaderboard: () => {

@@ -7,16 +7,49 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Users, Trophy, Play, User, LogOut, Beer } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
+import {getPlayerFromCookie, getTeamFromCookie} from "@/lib/cookie-utils";
+import {Team} from "@/lib/types";
 
 export default function DashboardPage() {
-  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz, removePlayerFromTeam } = useQuizStore()
+  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz, removePlayerFromTeam, setCurrentTeam, setCurrentPlayer, setCurrentBar, logout } = useQuizStore()
   const router = useRouter()
 
   useEffect(() => {
-    if (!currentPlayer || !currentTeam || !currentBar) {
-      // router.push("/")
+    if (!currentTeam){
+      const teamFromCookie = getTeamFromCookie()
+      if (teamFromCookie){
+        setCurrentTeam({
+          ...teamFromCookie,
+          players:[],
+          createdAt: new Date(),
+        });
+      }
     }
-  }, [currentPlayer, currentTeam, currentBar, router])
+    if (!currentPlayer){
+      const playerFromCookie = getPlayerFromCookie()
+      if (playerFromCookie){
+        setCurrentPlayer({
+          ...playerFromCookie,
+          joinedAt: new Date(),
+        })
+      }
+    }
+    if (!currentBar){
+    setCurrentBar({
+      name: "",
+      id: "",
+      code: "",
+      teams:[],
+      completeQuizes: 0,
+      score:0,
+      createdAt: new Date(),
+    });
+    }
+
+    if (!currentPlayer || !currentTeam || !currentBar) {
+      router.push("/")
+    }
+  }, [currentPlayer, currentTeam, currentBar, router, setCurrentTeam, setCurrentPlayer])
 
   if (!currentPlayer || !currentTeam || !currentBar) {
     return null
@@ -25,6 +58,8 @@ export default function DashboardPage() {
   const handleLogout = () => {
     removePlayerFromTeam(currentPlayer, currentTeam)
     resetQuiz()
+    logout();
+
     router.push("/")
   }
 

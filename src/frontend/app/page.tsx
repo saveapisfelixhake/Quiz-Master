@@ -149,10 +149,6 @@ function PlayerRegistrationForm() {
       joinedAt:""
     })
 
-
-
-    
-
     const success = joinTeam(player, teamCode.toUpperCase(), barCode)
 
     if (success) {
