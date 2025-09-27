@@ -4,16 +4,19 @@ using Backend.Domains.Common.Persistence.Sql.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Backend.Domains.Common.Persistence.Sql.Migrations
+namespace Backend.Domains.User.Persistence.Sql.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250926191915_AddIsInitialUserToUser")]
+    partial class AddIsInitialUserToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,18 +75,13 @@ namespace Backend.Domains.Common.Persistence.Sql.Migrations
                     b.ToTable("Bars", (string)null);
                 });
 
-            modelBuilder.Entity("Backend.Domains.Player.Entities.PlayerEntity", b =>
-                {
-                    b.Property<Guid>("PlayerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
             modelBuilder.Entity("Backend.Domains.Player.Entites.PlayerEntity", b =>
                 {
                     b.Property<Guid>("PlayerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("GroupName")
+                    b.Property<string>("BarName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -94,39 +92,6 @@ namespace Backend.Domains.Common.Persistence.Sql.Migrations
 
                     b.HasKey("PlayerId");
 
-                    b.ToTable("Player", (string)null);
-                });
-
-            modelBuilder.Entity("Backend.Domains.Player.Entities.PlayerGroupEntity", b =>
-                {
-                    b.Property<Guid>("GroupId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("BarName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("GroupName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.HasKey("GroupId");
-
-                    b.ToTable("PlayerGroup", (string)null);
-                });
-
-            modelBuilder.Entity("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", b =>
-                {
-                    b.HasOne("Backend.Domains.Bar.Domain.Models.Entities.BarAddressEntity", "Address")
-                        .WithOne()
-                        .HasForeignKey("Backend.Domains.Bar.Domain.Models.Entities.BarEntity", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
                     b.ToTable("Player", (string)null);
                 });
 
