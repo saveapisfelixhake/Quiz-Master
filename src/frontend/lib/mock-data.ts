@@ -8,25 +8,25 @@ export const mockBars: Bar[] = [
     teams: [],
     completeQuizes: 2,
     score: 1680,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "2",
     name: "AIchhörnchen",
-    code: "BB2024",
+    code: "BB2025",
     teams: [],
     completeQuizes: 0,
     score: 720,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "3",
     name: "Münster Easy",
-    code: "QW2024",
+    code: "QW2025",
     teams: [],
     completeQuizes: 0,
     score: 680,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "4",
@@ -35,7 +35,7 @@ export const mockBars: Bar[] = [
     teams: [],
     completeQuizes: 0,
     score: 1535,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "5",
@@ -44,7 +44,7 @@ export const mockBars: Bar[] = [
     teams: [],
     completeQuizes: 0,
     score: 1000,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "6",
@@ -53,7 +53,7 @@ export const mockBars: Bar[] = [
     teams: [],
     completeQuizes: 0,
     score: 800,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
 ]
 export const mockTeams: Team[] = [
@@ -63,23 +63,23 @@ export const mockTeams: Team[] = [
     code: "MSHACK25",
     players: [],
     score: 750,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "2",
     name: "AIchhörnchen",
-    code: "BB2024",
+    code: "BB2025",
     players: [],
     score: 720,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "3",
     name: "Münster Easy",
-    code: "QW2024",
+    code: "QW2025",
     players: [],
     score: 680,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "4",
@@ -87,7 +87,7 @@ export const mockTeams: Team[] = [
     code: "ITEMS123",
     players: [],
     score: 1535,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "5",
@@ -95,7 +95,7 @@ export const mockTeams: Team[] = [
     code: "VIADEE",
     players: [],
     score: 1000,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
   {
     id: "6",
@@ -103,7 +103,7 @@ export const mockTeams: Team[] = [
     code: "LVM1896",
     players: [],
     score: 800,
-    createdAt: new Date("2024-01-15"),
+    createdAt: new Date("2025-01-15"),
   },
 ]
 
@@ -112,19 +112,19 @@ export const mockPlayers: Player[] = [
     id: "1",
     name: "Stefanie Mollemeier",
     teamId: "4",
-    joinedAt: new Date("2024-01-15"),
+    joinedAt: new Date("2025-01-15"),
   },
   {
     id: "2",
     name: "Rita Helter",
     teamId: "5",
-    joinedAt: new Date("2024-01-15"),
+    joinedAt: new Date("2025-01-15"),
   },
   {
     id: "3",
     name: "Marcus Loskant",
     teamId: "6",
-    joinedAt: new Date("2024-01-15"),
+    joinedAt: new Date("2025-01-15"),
   },
 ]
 
@@ -155,7 +155,7 @@ export const mockQuestions: Question[] = [
 
 export const mockQuiz: Quiz = {
   id: "1",
-  title: "Allgemeinwissen Quiz 2024",
+  title: "Allgemeinwissen Quiz 2025",
   questions: mockQuestions,
   isActive: true,
   startTime: new Date(),

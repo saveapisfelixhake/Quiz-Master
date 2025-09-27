@@ -9,7 +9,7 @@ import { Users, Trophy, Play, User, LogOut, Beer } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 
 export default function DashboardPage() {
-  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz } = useQuizStore()
+  const { currentPlayer, currentTeam, currentQuiz, currentBar, resetQuiz, removePlayerFromTeam } = useQuizStore()
   const router = useRouter()
 
   useEffect(() => {
@@ -23,12 +23,13 @@ export default function DashboardPage() {
   }
 
   const handleLogout = () => {
+    removePlayerFromTeam(currentPlayer, currentTeam)
     resetQuiz()
     router.push("/")
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -36,7 +37,7 @@ export default function DashboardPage() {
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Quiz Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-300">Willkommen zurück, {currentPlayer.name}!</p>
           </div>
-          <Button variant="outline" onClick={handleLogout}>
+          <Button variant="outline" className="bg-primary text-primary-foreground" onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
             Abmelden
           </Button>
@@ -69,7 +70,7 @@ export default function DashboardPage() {
                 <p className="text-sm text-gray-600 dark:text-gray-400">Teammitglieder</p>
                 <p className="font-medium">{currentTeam.players.length} {currentTeam.players.length === 1 ? "Spieler*in" : "Spieler*innen"}</p>
               </div>
-              <Button variant="outline" onClick={() => router.push("/team")} className="w-full">
+              <Button variant="outline" onClick={() => router.push("/team")} className="w-full bg-primary text-primary-foreground">
                 Team verwalten
               </Button>
             </CardContent>
@@ -142,25 +143,25 @@ export default function DashboardPage() {
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Schnellzugriff</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Button variant="outline" onClick={() => router.push("/quiz")} className="h-20 flex-col gap-2">
+            <Button variant="outline" onClick={() => router.push("/quiz")} className="h-20 flex-col gap-2 bg-secondary text-secondary-foreground">
               <Play className="h-6 w-6" />
               Quiz spielen
             </Button>
-            <Button variant="outline" onClick={() => router.push("/leaderboard")} className="h-20 flex-col gap-2">
+            <Button variant="outline" onClick={() => router.push("/leaderboard")} className="h-20 flex-col gap-2 bg-secondary text-secondary-foreground">
               <Trophy className="h-6 w-6" />
               Bestenliste
             </Button>
-            <Button variant="outline" onClick={() => router.push("/team")} className="h-20 flex-col gap-2">
+            <Button variant="outline" onClick={() => router.push("/team")} className="h-20 flex-col gap-2 bg-secondary text-secondary-foreground">
               <Users className="h-6 w-6" />
               Team
             </Button>
-            <Button variant="outline" onClick={() => router.push("/profile")} className="h-20 flex-col gap-2">
+            <Button variant="outline" onClick={() => router.push("/profile")} className="h-20 flex-col gap-2 bg-secondary text-secondary-foreground">
               <User className="h-6 w-6" />
               Profil
             </Button>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

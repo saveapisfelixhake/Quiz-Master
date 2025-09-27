@@ -37,7 +37,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-background">
 
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
@@ -54,7 +54,7 @@ export default function HomePage() {
         </div>
 
         {/* Registration Section */}
-        <div className="max-w-md mx-auto mb-12">
+        <div className="max-w-md mx-auto mb-6">
           {!showRegistration ? (
             <Card>
               <CardHeader className="text-center">

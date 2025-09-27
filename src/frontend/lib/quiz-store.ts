@@ -27,6 +27,7 @@ interface QuizStore {
 
   // Actions
   updatePlayerProfile: (updates: Partial<Player>) => void
+  logout: () => void
   initializeFromCookies: () => void
   setCurrentPlayer: (player: Player) => void
   setCurrentTeam: (team: Team) => void
@@ -35,7 +36,7 @@ interface QuizStore {
   submitAnswer: (answer: Omit<Answer, "id" | "submittedAt">) => void
   updateLeaderboard: () => void
   resetQuiz: () => void
-  logout: () => void
+  removePlayerFromTeam: (currentPlayer: Player, currentTeam: Team) => void
 }
 
 function playerToCookie(player: Player): CookiePlayer {
@@ -97,14 +98,14 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
 
     // currentTeam.players aktualisieren (falls im Team)
     const currentTeam = state.currentTeam
-      ? { 
-          ...state.currentTeam, 
-          players: state.currentTeam.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p) 
+      ? {
+          ...state.currentTeam,
+          players: state.currentTeam.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p)
         }
       : null
 
     // teams[] aktualisieren, damit der Player auch dort konsistent ist
-    const teams = state.teams.map(t => 
+    const teams = state.teams.map(t =>
       t.id === currentTeam?.id
         ? { ...t, players: t.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p) }
         : t
@@ -143,7 +144,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       set({ isInitialized: true })
     }
   },
-  
+
   setCurrentPlayer: (player) => {
     set({ currentPlayer: player })
     if (typeof window !== "undefined") {
@@ -197,6 +198,9 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       answers: [...state.answers, newAnswer],
     }))
   },
+  logout: () => {
+
+  },
 
   updateLeaderboard: () => {
     // This would calculate scores based on answers in a real implementation
@@ -210,14 +214,19 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       currentBar: null,
       answers: [],
     }),
-  logout: () => {
-    if (typeof window !== "undefined") {
-      clearPlayerCookies()
-    }
-    set({
-      currentPlayer: null,
-      currentTeam: null,
-      answers: [],
-    })
-  },
+
+  removePlayerFromTeam: (currentPlayer: Player, currentTeam: Team) => {
+    const { teams } = get(); // aktuelles Array holen
+
+    const updatedTeams = teams.map(team =>
+        team.id === currentTeam.id
+            ? {
+              ...team,
+              players: team.players.filter(player => player.id !== currentPlayer.id),
+            }
+            : team
+    );
+
+    set({ teams: updatedTeams }); // State / Store aktualisieren
+  }
 }))

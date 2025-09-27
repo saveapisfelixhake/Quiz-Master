@@ -103,7 +103,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -117,10 +117,10 @@ export default function QuizPage() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Badge variant="outline" className="flex items-center gap-2">
+            {/*<Badge variant="outline" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
               {currentTeam.players.length} Spieler
-            </Badge>
+            </Badge>*/}
             <Badge variant={timeLeft < 60 ? "destructive" : "secondary"} className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
               {formatTime(timeLeft)}
@@ -136,7 +136,7 @@ export default function QuizPage() {
             </p>
             <p className="text-sm font-medium">{Math.round(progress)}% abgeschlossen</p>
           </div>
-          <Progress value={progress} className="h-2" />
+          <Progress value={progress} className="h-2 [&>div]:bg-primary bg-secondary" />
         </div>
 
         {/* Question Card */}
@@ -164,13 +164,13 @@ export default function QuizPage() {
           <Button
             onClick={handleNextQuestion}
             disabled={isSubmitting || !answers[currentQuestion.id]}
-            className="min-w-32"
+            className="min-w-32 bg-primary"
           >
             {isSubmitting ? "Wird übertragen..." : isLastQuestion ? "Quiz beenden" : "Nächste Frage"}
           </Button>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
