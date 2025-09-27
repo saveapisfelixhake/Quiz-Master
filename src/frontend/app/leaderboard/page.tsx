@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Trophy, Medal, Award, Users, TrendingUp, ArrowLeft, Crown, Star } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
+import { AvatarImage } from "@radix-ui/react-avatar"
 
 export default function LeaderboardPage() {
   const { leaderboard, teams, bars, currentTeam } = useQuizStore()
@@ -125,28 +126,28 @@ export default function LeaderboardPage() {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className="pr-2">
+                      <div className="flex items-center gap-2">
                         <div
-                          className={`w-12 h-12 rounded-full flex items-center justify-center ${getRankBadgeColor(
+                          className={`w-12 h-12 rounded-full flex items-center flex-shrink-0 justify-center ${getRankBadgeColor(
                             entry.rank,
                           )}`}
                         >
                           {entry.rank <= 3 ? getRankIcon(entry.rank) : <span className="font-bold">#{entry.rank}</span>}
                         </div>
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h3 className="text-xl font-semibold">{entry.teamName}</h3>
-                          {entry.rank === 1 && <Crown className="h-5 w-5 text-secondary" />}
-                          {entry.teamId === currentTeam?.id && (
-                            <Badge variant="secondary" className="text-xs">
-                              Ihr Team
-                            </Badge>
-                          )}
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-xl font-semibold">{entry.teamName}</h3>
+                            {entry.rank === 1 && <Crown className="h-5 w-5 text-secondary" />}
+                            {entry.teamId === currentTeam?.id && (
+                              <Badge variant="secondary" className="text-xs">
+                                Ihr Team
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-gray-600 dark:text-gray-400">
+                            {entry.players.length > 0 ? entry.players.join(", ") : "Keine aktiven Spieler"}
+                          </p>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-400">
-                          {entry.players.length > 0 ? entry.players.join(", ") : "Keine aktiven Spieler"}
-                        </p>
                       </div>
                       <div className="text-right">
                         <p className="text-3xl font-bold text-primary">{entry.score}</p>
@@ -166,7 +167,7 @@ export default function LeaderboardPage() {
                 <Card key={bar.id} className="transition-all hover:shadow-md" >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
                         <div
                           className={`w-12 h-12 rounded-full flex items-center justify-center ${getRankBadgeColor(
                             index + 1,
@@ -175,6 +176,7 @@ export default function LeaderboardPage() {
                           {index + 1 <= 3 ? getRankIcon(index + 1) : <span className="font-bold">#{index + 1}</span>}
                         </div>
                         <Avatar className="h-12 w-12">
+                          <AvatarImage src={bar.avatar} />
                           <AvatarFallback className="bg-blue-600 text-white">
                             {getPlayerInitials(bar.name)}
                           </AvatarFallback>

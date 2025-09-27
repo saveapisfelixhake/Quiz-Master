@@ -9,24 +9,7 @@ export const mockBars: Bar[] = [
     completeQuizes: 2,
     score: 1680,
     createdAt: new Date("2025-01-15"),
-  },
-  {
-    id: "2",
-    name: "AIchhörnchen",
-    code: "BB2025",
-    teams: [],
-    completeQuizes: 0,
-    score: 720,
-    createdAt: new Date("2025-01-15"),
-  },
-  {
-    id: "3",
-    name: "Münster Easy",
-    code: "QW2025",
-    teams: [],
-    completeQuizes: 0,
-    score: 680,
-    createdAt: new Date("2025-01-15"),
+    avatar: null,
   },
   {
     id: "4",
@@ -36,6 +19,7 @@ export const mockBars: Bar[] = [
     completeQuizes: 0,
     score: 1535,
     createdAt: new Date("2025-01-15"),
+    avatar: "/bars/items.jpg",
   },
   {
     id: "5",
@@ -45,6 +29,7 @@ export const mockBars: Bar[] = [
     completeQuizes: 0,
     score: 1000,
     createdAt: new Date("2025-01-15"),
+    avatar: null,
   },
   {
     id: "6",
@@ -54,6 +39,7 @@ export const mockBars: Bar[] = [
     completeQuizes: 0,
     score: 800,
     createdAt: new Date("2025-01-15"),
+    avatar: null,
   },
 ]
 export const mockTeams: Team[] = [
