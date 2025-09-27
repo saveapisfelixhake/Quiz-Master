@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, Trophy, Play, User, LogOut, Beer } from "lucide-react"
+import { Users, Trophy, Play, User, LogOut, Beer, Star } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 import { getPlayerFromCookie, getTeamFromCookie } from "@/lib/cookie-utils";
 import { Team } from "@/lib/types";
@@ -78,6 +78,10 @@ export default function DashboardPage() {
           </Button>
         </div>
 
+        <Button onClick={() => router.push("/quiz")} className="mb-5 w-full bg-secondary text-secondary-foreground">
+          <Play className="h-4 w-4 mr-2" />
+          Quiz spielen
+        </Button>
         <div className="grid lg:grid-cols-3 gap-6">
 
           {/* Team Info */}
@@ -139,6 +143,39 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
+          {/* Bar Info */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Star className="h-5 w-5" />
+                Prämien-Info
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="relative flex">
+              <div className="space-y-3" >
+                <div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">250 Punkte</p>
+                  <p className="font-medium">Ein Kaltgetränke</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">480 Punkte</p>
+                  <p className="font-medium">Zwei Kaltgetränke</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">700 Punkte</p>
+                  <p className="font-medium">Drei Kaltgetränke</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">900 Punkte</p>
+                  <p className="font-medium">Vier Kaltgetränke</p>
+                </div>
+              </div>
+              <div className="space-y-3 absolute bottom-0 right-5" >
+                <img className="w-28 h-28" src=" /qr/price.png" />
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Quiz Status */}
           <Card>
             <CardHeader>
@@ -172,16 +209,12 @@ export default function DashboardPage() {
               )}
             </CardContent>
           </Card>
-        </div>
+        </div >
 
         {/* Quick Actions */}
-        <div className="mt-8">
+        < div className="mt-8" >
           <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Schnellzugriff</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Button variant="outline" onClick={() => router.push("/quiz")} className="h-20 flex-col gap-2 bg-secondary text-secondary-foreground">
-              <Play className="h-6 w-6" />
-              Quiz spielen
-            </Button>
             <Button variant="outline" onClick={() => router.push("/leaderboard")} className="h-20 flex-col gap-2 bg-secondary text-secondary-foreground">
               <Trophy className="h-6 w-6" />
               Bestenliste
@@ -195,8 +228,8 @@ export default function DashboardPage() {
               Profil
             </Button>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     </div >
   )
 }

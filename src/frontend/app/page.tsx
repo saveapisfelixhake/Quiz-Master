@@ -43,9 +43,7 @@ export default function HomePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-primary rounded-xl">
-              <Zap className="h-8 w-8 text-white" />
-            </div>
+            <img className="w-14 h-14 rounded-xl" src="logo/logo.png" />
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Rätselrausch</h1>
           </div>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-balance">

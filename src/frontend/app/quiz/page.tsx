@@ -269,12 +269,7 @@ function QuizCompletedScreen() {
               <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <CheckCircle className="h-8 w-8 text-blue-600 mx-auto mb-2" />
                 <p className="font-semibold">Alle Fragen beantwortet</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Quiz erfolgreich abgeschlossen</p>
-              </div>
-              <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                <Users className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                <p className="font-semibold">Team-Leistung</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Antworten werden ausgewertet</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Ihr habt 45/45 Punkten erreicht!</p>
               </div>
             </div>
 

@@ -137,31 +137,33 @@ export const mockPlayers: Player[] = [
 export const mockQuestions: Question[] = [
   {
     id: "1",
-    text: "Welche ist die Hauptstadt von Deutschland?",
+    text: "Welche bekannte Sehenswürdigkeit steht auf dem Prinzipalmarkt in Münster?",
     type: "single-choice",
-    options: ["Berlin", "München", "Hamburg", "Köln"],
-    correctAnswer: "Berlin",
+    options: ["Kölner Dom", "Lamberti-Kirche", "Frauenkirche", "Ulmer Münster"],
+    correctAnswer: "Lamberti-Kirche",
     points: 10,
   },
   {
     id: "2",
-    text: "Welche Programmiersprachen werden für Webentwicklung verwendet?",
+    text: "Welche Veranstaltungen sind typisch für Münster?",
     type: "multiple-choice",
-    options: ["JavaScript", "Python", "HTML", "CSS", "Java"],
-    correctAnswer: ["JavaScript", "HTML", "CSS"],
+    options: ["Send", "Weihnachtsmarkt", "Cannstatter Wasen", "Kieler Woche", "Skulptur Projekte"],
+    correctAnswer: ["Send", "Weihnachtsmarkt", "Skulptur Projekte"],
     points: 15,
   },
   {
     id: "3",
-    text: "Beschreiben Sie in einem Satz, was Künstliche Intelligenz ist.",
-    type: "free-text",
+    text: "Wer ist der aktuelle Schirmherr vom MSHack?",
+    type: "single-choice",
+    options: ["Tilman Fuchs", "Markus Lewe", "Georg Lunemann", "Stephan Brinktrine"],
+    correctAnswer: ["Markus Lewe"],
     points: 20,
   },
 ]
 
 export const mockQuiz: Quiz = {
   id: "1",
-  title: "Allgemeinwissen Quiz 2025",
+  title: "Münster Quiz 2025",
   questions: mockQuestions,
   isActive: true,
   startTime: new Date(),
