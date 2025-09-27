@@ -19,7 +19,7 @@ export default function HomePage() {
   const { currentPlayer, currentTeam, isInitialized } = useQuizStore()
 
   useEffect(() => {
-    alert(currentPlayer);
+
     if (isInitialized && currentPlayer && currentTeam) {
       router.push("/dashboard")
     }

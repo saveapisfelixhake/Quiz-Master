@@ -14,7 +14,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!currentPlayer || !currentTeam || !currentBar) {
-      router.push("/")
+      // router.push("/")
     }
   }, [currentPlayer, currentTeam, currentBar, router])
 
