@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Users, Crown, Copy, Check, ArrowLeft, UserPlus, QrCode } from "lucide-react"
 import { useQuizStore } from "@/lib/quiz-store"
 import Image from "next/image";
-import qrCode from "../../assets/QRCodeTeamidMSHACK25.png";
+import qrCode from "../../public/qr/QRCodeTeamidMSHACK25.png";
 
 export default function TeamPage() {
   const { currentPlayer, currentTeam, teams } = useQuizStore()

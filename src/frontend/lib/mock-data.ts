@@ -2,16 +2,6 @@ import type { Team, Player, Question, Quiz, LeaderboardEntry, Bar } from "./type
 
 export const mockBars: Bar[] = [
   {
-    id: "1",
-    name: "Blaues Haus",
-    code: "BLAU",
-    teams: [],
-    completeQuizes: 2,
-    score: 1680,
-    createdAt: new Date("2025-01-15"),
-    avatar: null,
-  },
-  {
     id: "4",
     name: "items",
     code: "ITEMS123",
@@ -29,7 +19,7 @@ export const mockBars: Bar[] = [
     completeQuizes: 0,
     score: 1000,
     createdAt: new Date("2025-01-15"),
-    avatar: null,
+    avatar: "/bars/viadee.jpg",
   },
   {
     id: "6",
@@ -39,7 +29,17 @@ export const mockBars: Bar[] = [
     completeQuizes: 0,
     score: 800,
     createdAt: new Date("2025-01-15"),
-    avatar: null,
+    avatar: "/bars/lvm.jpg",
+  },
+  {
+    id: "1",
+    name: "digitalhub",
+    code: "HUB",
+    teams: [],
+    completeQuizes: 0,
+    score: 2025,
+    createdAt: new Date("2025-01-15"),
+    avatar: "/bars/digitalhub.jpg",
   },
 ]
 export const mockTeams: Team[] = [

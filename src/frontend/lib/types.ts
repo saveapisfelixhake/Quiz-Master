@@ -14,7 +14,7 @@ export interface Bar {
   completeQuizes: number
   score: number
   createdAt: Date
-  avatar: string
+  avatar?: string
 }
 
 export interface Team {
