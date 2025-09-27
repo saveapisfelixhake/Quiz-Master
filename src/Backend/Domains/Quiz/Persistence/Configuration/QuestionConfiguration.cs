@@ -15,8 +15,10 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
             .WithOne()
             .HasForeignKey(q => q.QuestionId);
         
+        builder.Property(q => q.Name).IsRequired();
         builder.Property(q => q.QuestionText).HasColumnType("longtext").IsRequired();
         builder.Property(q => q.MultipleAnswers).IsRequired();
         builder.Property(q => q.HasTextInput).IsRequired();
+        builder.Property(q => q.IsAnswered).IsRequired();
     }
 }

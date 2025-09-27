@@ -20,6 +20,7 @@ public class QuizConfiguration : IEntityTypeConfiguration<Entity.Quiz>
         builder.Property(q => q.Name).HasMaxLength(20).IsRequired();
         builder.Property(q => q.Description).HasColumnType("longtext").IsRequired();
         builder.Property(q => q.StartDate).IsRequired();
+        builder.Property(q => q.QuizState).IsRequired();
         builder.Property(q => q.EndDate).IsRequired();
         builder.Property(q => q.IsActive).IsRequired();
     }

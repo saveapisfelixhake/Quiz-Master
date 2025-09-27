@@ -12,5 +12,7 @@ public class GetQuestionDto
     
     public bool HasTextInput { get; set; }
     
+    public bool IsAnswered { get; set; }
+    
     public List<Entity.Answer> Answers { get; set; }
 }

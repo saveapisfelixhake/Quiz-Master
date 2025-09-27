@@ -10,4 +10,6 @@ public class UpdateQuestionDto
     public bool MultipleAnswers { get; set; }
     
     public bool HasTextInput { get; set; }
+    
+    public bool IsAnswered { get; set; }
 }

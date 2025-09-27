@@ -14,6 +14,7 @@ public class QuizMapper : IQuizMapper
             StartDate = quiz.StartDate,
             EndDate = quiz.EndDate,
             IsActive = quiz.IsActive,
+            QuizState = quiz.QuizState,
             Questions = quiz.Questions,
             Bars = quiz.Bars,
         };
@@ -28,6 +29,7 @@ public class QuizMapper : IQuizMapper
             StartDate = createQuizDto.StartDate,
             EndDate = createQuizDto.EndDate,
             IsActive = createQuizDto.IsActive,
+            QuizState = createQuizDto.QuizState,
             Questions = []
         };
     }
@@ -39,6 +41,7 @@ public class QuizMapper : IQuizMapper
         quiz.StartDate = updateQuizDto.StartDate;
         quiz.EndDate = updateQuizDto.EndDate;
         quiz.IsActive = updateQuizDto.IsActive;
+        quiz.QuizState = updateQuizDto.QuizState;
         quiz.Bars = updateQuizDto.Bars;
     }
 }

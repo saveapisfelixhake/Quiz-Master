@@ -1,4 +1,5 @@
 ﻿using Backend.Domains.Bar.Domain.Models.Entities;
+using Backend.Domains.Quiz.Entity.Enum;
 
 namespace Backend.Domains.Quiz.Dto.Quiz;
 
@@ -15,4 +16,6 @@ public class UpdateQuizDto
     public bool IsActive { get; set; }
     
     public List<BarEntity> Bars { get; set; }
+    
+    public QuizStateEnum QuizState { get; set; }
 }

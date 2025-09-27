@@ -14,6 +14,7 @@ public class QuestionMapper : IQuestionMapper
             QuestionText = question.QuestionText,
             MultipleAnswers = question.MultipleAnswers,
             HasTextInput = question.HasTextInput,
+            IsAnswered = question.IsAnswered,
             Answers = question.Answers,
         };
     }
@@ -27,6 +28,7 @@ public class QuestionMapper : IQuestionMapper
             QuestionText = createQuestionDto.QuestionText,
             MultipleAnswers = createQuestionDto.MultipleAnswers,
             HasTextInput = createQuestionDto.HasTextInput,
+            IsAnswered = createQuestionDto.IsAnswered,
         };
     }
 
@@ -37,5 +39,6 @@ public class QuestionMapper : IQuestionMapper
         question.QuestionText = updateQuestionDto.QuestionText;
         question.MultipleAnswers = updateQuestionDto.MultipleAnswers;
         question.HasTextInput = updateQuestionDto.HasTextInput;
+        question.IsAnswered = updateQuestionDto.IsAnswered;
     }
 }
