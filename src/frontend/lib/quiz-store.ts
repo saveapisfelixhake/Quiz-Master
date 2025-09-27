@@ -88,41 +88,41 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
   isInitialized: false,
 
   updatePlayerProfile: (updates) => {
-  set((state) => {
-    if (!state.currentPlayer) return {}
+    set((state) => {
+      if (!state.currentPlayer) return {}
 
-    const updatedPlayer: Player = { ...state.currentPlayer, ...updates }
+      const updatedPlayer: Player = { ...state.currentPlayer, ...updates }
 
-    // players-Liste aktualisieren
-    const players = state.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p)
+      // players-Liste aktualisieren
+      const players = state.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p)
 
-    // currentTeam.players aktualisieren (falls im Team)
-    const currentTeam = state.currentTeam
-      ? {
+      // currentTeam.players aktualisieren (falls im Team)
+      const currentTeam = state.currentTeam
+        ? {
           ...state.currentTeam,
           players: state.currentTeam.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p)
         }
-      : null
+        : null
 
-    // teams[] aktualisieren, damit der Player auch dort konsistent ist
-    const teams = state.teams.map(t =>
-      t.id === currentTeam?.id
-        ? { ...t, players: t.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p) }
-        : t
-    )
+      // teams[] aktualisieren, damit der Player auch dort konsistent ist
+      const teams = state.teams.map(t =>
+        t.id === currentTeam?.id
+          ? { ...t, players: t.players.map(p => p.id === updatedPlayer.id ? updatedPlayer : p) }
+          : t
+      )
 
-    if (typeof window !== "undefined") {
-      savePlayerToCookie(playerToCookie(updatedPlayer))
-    }
+      if (typeof window !== "undefined") {
+        savePlayerToCookie(playerToCookie(updatedPlayer))
+      }
 
-    return {
-      currentPlayer: updatedPlayer,
-      players,
-      currentTeam,
-      teams,
-    }
-  })
-},
+      return {
+        currentPlayer: updatedPlayer,
+        players,
+        currentTeam,
+        teams,
+      }
+    })
+  },
 
   // Actions
   initializeFromCookies: () => {
@@ -152,7 +152,7 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     }
   },
 
- setCurrentTeam: (team) => {
+  setCurrentTeam: (team) => {
     set({ currentTeam: team })
     if (typeof window !== "undefined") {
       saveTeamToCookie(teamToCookie(team))
@@ -219,12 +219,12 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
     const { teams } = get(); // aktuelles Array holen
 
     const updatedTeams = teams.map(team =>
-        team.id === currentTeam.id
-            ? {
-              ...team,
-              players: team.players.filter(player => player.id !== currentPlayer.id),
-            }
-            : team
+      team.id === currentTeam.id
+        ? {
+          ...team,
+          players: team.players.filter(player => player.id !== currentPlayer.id),
+        }
+        : team
     );
 
     set({ teams: updatedTeams }); // State / Store aktualisieren

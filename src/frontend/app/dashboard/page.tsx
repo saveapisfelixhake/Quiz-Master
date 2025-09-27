@@ -148,7 +148,7 @@ export default function DashboardPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Star className="h-5 w-5" />
-                Prämien-Info
+                Gratis Prämien
               </CardTitle>
             </CardHeader>
             <CardContent className="relative flex">
@@ -198,11 +198,11 @@ export default function DashboardPage() {
                   <Badge variant={currentQuiz.isActive ? "default" : "secondary"}>
                     {currentQuiz.isActive ? "Aktiv" : "Beendet"}
                   </Badge>
-                  {currentQuiz.isActive && (
+                  {/*{currentQuiz.isActive && (
                     <Button onClick={() => router.push("/quiz")} className="w-full">
                       Quiz starten
                     </Button>
-                  )}
+                  )}*/}
                 </>
               ) : (
                 <p className="text-gray-600 dark:text-gray-400">Kein aktives Quiz verfügbar</p>
